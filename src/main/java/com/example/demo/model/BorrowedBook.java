@@ -10,6 +10,10 @@ import java.util.Date;
 @Table(name = "borrowed_book")
 public class BorrowedBook {
 
+    @Id
+    @Column(name = "id")
+    private Long id;
+
     @ManyToOne
     @JoinColumn(name = "client_id")
     private Client client;

@@ -16,24 +16,29 @@ public class Book {
     @Column(name = "isbn")
     private String ISBN;
 
+
     @Column(name = "name")
     private String name;
 
+
     @Column(name = "publisher_id")
     private Long publisherId;
+
 
     @ManyToMany(fetch = FetchType.LAZY,
             cascade = {
                     CascadeType.PERSIST,
                     CascadeType.MERGE
             })
-    @JoinTable(name = "author",
+    @JoinTable(name = "book_author",
             joinColumns = { @JoinColumn(name = "book_isbn") },
             inverseJoinColumns = { @JoinColumn(name = "author_id") })
     private Set<Author> authors = new HashSet<>();
 
+
     @Column(name = "publish_date")
     private Date publishDate;
+
 
     @Column(name = "count")
     private Integer count;

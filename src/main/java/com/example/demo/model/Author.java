@@ -26,8 +26,8 @@ public class Author {
                     CascadeType.PERSIST,
                     CascadeType.MERGE
             },
-            mappedBy = "author")
-    private Set<Book> posts = new HashSet<>();
+            mappedBy = "authors")
+    private Set<Book> books = new HashSet<>();
 
 
 }
