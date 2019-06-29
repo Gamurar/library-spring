@@ -36,8 +36,8 @@ public class Book {
     private Set<Author> authors = new HashSet<>();
 
 
-    @Column(name = "publish_date")
-    private Date publishDate;
+    @Column(name = "publish_year", columnDefinition="VARCHAR(4)")
+    private String publishYear;
 
 
     @Column(name = "count")

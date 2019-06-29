@@ -1,10 +1,79 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+    <title>Home</title>
+
+    <link rel="stylesheet" th:href="@{webjars/bootstrap/4.3.1/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/main.css}"/>
+</head>
+<body class="bg-light">
+
+<div class="container py-5">
+    <div class="row">
+        <div class="col">
+            <h4 class="mb-3" th:text="#{add-book.title}"></h4>
+            <form class="needs-validation" novalidate="">
+
+                <div class="mb-3">
+                    <label for="isbn" th:text="#{add-book.isbn.label}"></label>
+                    <div class="input-group">
+                        <input name="isbn" type="number" class="form-control" id="isbn" th:placeholder="#{add-book.isbn.placeholder}" required="">
+                        <div class="invalid-feedback" style="width: 100%;">
+                            Your username is required.
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="name" th:text="#{add-book.book-name.label}"></label>
+                    <input type="text" class="form-control" id="name" th:placeholder="#{add-book.book-name.placeholder}" required="">
+                    <div class="invalid-feedback">
+                        Please enter your shipping address.
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8 mb-3">
+                        <label for="publisher" th:text="#{add-book.publisher.label}"></label>
+                        <input type="text" class="form-control" id="publisher" th:placeholder="#{add-book.publisher.placeholder}" required="">
+                        <div class="invalid-feedback">
+                            Please enter your shipping address.
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="publish-year" th:text="#{add-book.publish-year.label}"></label>
+                        <input type="number" class="form-control" id="publish-year" th:placeholder="#{add-book.publish-year.placeholder}" required="">
+                        <div class="invalid-feedback">
+                            Please enter your shipping address.
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="authors" th:text="#{add-book.authors.label}"></label>
+                    <input type="text" class="form-control" id="authors" th:placeholder="#{add-book.authors.placeholder}" required="">
+                    <div class="invalid-feedback">
+                        Please enter your shipping address.
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="copies" th:text="#{add-book.copies.label}"></label>
+                    <input type="number" class="form-control" id="copies" th:placeholder="#{add-book.copies.placeholder}" required="">
+                    <div class="invalid-feedback">
+                        Please enter your shipping address.
+                    </div>
+                </div>
+
+
+                <button class="btn btn-primary btn-lg btn-block mt-5" type="submit" th:text="#{add-book.button.submit.label}"></button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<link rel="javascript" th:href="@{webjars/bootstrap/4.3.1/js/bootstrap.min.js}"/>
+<link rel="stylesheet" th:href="@{/css/main.css}"/>
 </body>
 </html>

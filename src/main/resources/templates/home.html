@@ -17,7 +17,11 @@
             <img class="d-block mx-auto mb-4" src="../static/images/bookshelf.png" th:src="@{/images/bookshelf.png}" alt="" width="72" height="72">
             <h1>Library</h1>
 
-            <button class="btn btn-primary my-5">add a book</button>
+            <form action="/add-book" th:action="@{/add-book}"
+                  method="post">
+                <button type="submit" class="btn btn-primary my-5">add a book</button>
+            </form>
+
         </div>
 
         <div class="row">

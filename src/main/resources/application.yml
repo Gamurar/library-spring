@@ -9,3 +9,5 @@ spring:
     generate-ddl: true
     hibernate:
       ddl-auto: update
+  messages:
+    basename: i18n/messages
