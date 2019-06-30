@@ -19,13 +19,18 @@ public class HomeController {
     }
 
 
-    @GetMapping(produces = MediaType.TEXT_HTML_VALUE)
+    @GetMapping(path = {"/home", "/"})
     public final String showHome() {
         return VIEW_HOME;
     }
 
     @PostMapping(path = "/add-book", produces = "text/html")
     public String addBook() {
+        return "add-book";
+    }
+
+    @GetMapping(path = "/add-book", produces = "text/html")
+    public String addBookGet() {
         return "add-book";
     }
 
