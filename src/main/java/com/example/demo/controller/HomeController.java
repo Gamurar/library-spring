@@ -20,7 +20,7 @@ public class HomeController {
 
 
     @GetMapping(produces = MediaType.TEXT_HTML_VALUE)
-    public final String showWelcome() {
+    public final String showHome() {
         return VIEW_HOME;
     }
 
