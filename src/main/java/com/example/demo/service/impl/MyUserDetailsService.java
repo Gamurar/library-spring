@@ -1,4 +1,4 @@
-package com.example.demo.service;
+package com.example.demo.service.impl;
 
 import com.example.demo.MyUserPrincipal;
 import com.example.demo.domain.User;

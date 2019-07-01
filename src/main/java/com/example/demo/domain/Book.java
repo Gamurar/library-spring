@@ -20,8 +20,9 @@ public class Book {
     private String name;
 
 
-    @Column(name = "publisher_id")
-    private Long publisherId;
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="publisher_id")
+    private Publisher publisher;
 
 
     @ManyToMany(fetch = FetchType.LAZY,

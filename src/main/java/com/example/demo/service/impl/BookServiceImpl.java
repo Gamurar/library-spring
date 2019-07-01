@@ -38,6 +38,11 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
+    public Book findByIsbn(String isbn) {
+        return repository.findByIsbn(isbn);
+    }
+
+    @Override
     public Book save(BookForm bookForm) {
         Author author = createAuthor(bookForm);
         Publisher publisher = createPublisher(bookForm);
@@ -60,7 +65,7 @@ public class BookServiceImpl implements BookService {
         book.setPublishYear(bookForm.getPublishYear());
         book.setCopies(bookForm.getCopies());
         book.setAuthors(authors);
-        book.setPublisherId(publisher.getId());
+        book.setPublisher(publisher);
 
         return book;
     }

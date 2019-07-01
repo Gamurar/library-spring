@@ -6,3 +6,14 @@ function addAuthorField() {
         $("#edit-book_author_fields").append(authorInput);
     }
 }
+
+$( document ).ready(function() {
+    $(".btn-edit-book").click(function () {
+        let bookIsbn = $(this).parent().next().text();
+
+        let url = "/editBook/" + bookIsbn;
+
+        alert( url );
+        $("#edit-book__replace").load(url);
+    })
+});

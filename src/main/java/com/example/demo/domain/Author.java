@@ -1,12 +1,16 @@
 package com.example.demo.domain;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
 @Data
+@EqualsAndHashCode(exclude="books")
+@ToString(exclude = "books")
 @Entity
 @Table(name = "author")
 public class Author {
