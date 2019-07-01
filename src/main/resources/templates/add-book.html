@@ -50,11 +50,20 @@
                         </div>
                     </div>
                 </div>
-                <div class="mb-3">
-                    <label for="authors" th:text="#{add-book.authors.label}"></label>
-                    <input type="text" class="form-control" id="authors" th:placeholder="#{add-book.authors.placeholder}" required="" th:field="${newBook.author}">
-                    <div class="invalid-feedback">
-                        Please enter your shipping address.
+                <div class="row">
+                    <div class="col-md-11 mb-3">
+                        <label for="authors" th:text="#{add-book.authors.label}"></label>
+                        <div id="edit-book_author_fields">
+                            <input type="text" class="form-control" id="authors" th:placeholder="#{add-book.authors.placeholder}" required="" th:field="${newBook.author}">
+                            <div class="invalid-feedback">
+                                Please enter your shipping address.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-1 mt-4">
+                        <button type="button" class="btn btn-link" onclick="addAuthorField()">
+                            <i class="fas fa-plus"></i>
+                        </button>
                     </div>
                 </div>
                 <div class="mb-3">
