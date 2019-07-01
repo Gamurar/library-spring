@@ -1,4 +1,4 @@
-package com.example.demo.model;
+package com.example.demo.domain;
 
 import lombok.Data;
 
@@ -11,6 +11,7 @@ import java.util.Date;
 public class BorrowedBook {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private Long id;
 

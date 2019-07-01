@@ -1,9 +1,8 @@
-package com.example.demo.model;
+package com.example.demo.domain;
 
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -14,7 +13,7 @@ public class Book {
 
     @Id
     @Column(name = "isbn")
-    private String ISBN;
+    private String isbn;
 
 
     @Column(name = "name")
@@ -40,7 +39,7 @@ public class Book {
     private String publishYear;
 
 
-    @Column(name = "count")
-    private Integer count;
+    @Column(name = "copies")
+    private Integer copies;
 
 }
