@@ -19,6 +19,7 @@
         <img src="../static/images/bookshelf.png" width="30" height="30" class="d-inline-block align-top" alt="">
         Library
     </a>
+    <a th:href="@{/logout}" class="btn btn-dark">Logout</a>
 </nav>
 
 <div th:fragment="site-title" class="mb-5">
@@ -70,7 +71,7 @@
 
         <div class="row">
             <h4 class="mb-3 col-10" th:text="${isNew} ? #{add-book.title} : #{edit-book.title}"></h4>
-            <button class="btn btn-danger col-2" th:unless="${isNew}" name="action" value="delete">Delete</button>
+            <button class="btn btn-danger col-2" th:unless="${isNew}" name="action" value="delete" th:text="#{button.delete}"></button>
         </div>
 
 
