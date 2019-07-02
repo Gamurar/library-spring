@@ -11,7 +11,6 @@
     <div th:replace="fragments/general.html :: style-links"></div>
 </head>
 <body>
-
 <div class="container mt-5">
     <nav class="navbar navbar-light bg-light">
         <a class="navbar-brand" th:href="@{/home}">
@@ -21,23 +20,10 @@
     </nav>
     <div class="row justify-content-center">
         <div class="col-9">
-            <div class="tab-content" id="v-pills-tabContent">
-                <div class="tab-pane fade show active text-center" id="v-pills-home" role="tabpanel"
-                     aria-labelledby="v-pills-home">
 
-                    <div th:replace="fragments/general.html :: site-title"></div>
 
-                    <div class="row justify-content-end m-2">
-                        <form action="/edit" th:method="GET" class="col-md-1">
-                            <button type="submit" class="btn btn-primary">New</button>
-                        </form>
+            <div th:replace="fragments/general.html :: edit-book"></div>
 
-                    </div>
-
-                    <div th:replace="fragments/general.html ::  books-table"></div>
-
-                </div>
-            </div>
         </div>
     </div>
 </div>

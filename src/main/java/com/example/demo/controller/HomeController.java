@@ -4,12 +4,14 @@ import com.example.demo.domain.dto.BookForm;
 import com.example.demo.domain.Book;
 import com.example.demo.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+import java.net.http.HttpRequest;
 import java.util.List;
 
 @Controller
@@ -18,6 +20,7 @@ public class HomeController {
 
 
     private static final String VIEW_HOME = "home";
+    private static final String VIEW_EDIT = "edit";
 
     private BookService bookService;
 
@@ -45,6 +48,20 @@ public class HomeController {
         model.addObject("book", new BookForm());
 
         return model;
+    }
+
+    @GetMapping(path = "/edit")
+    public ModelAndView editBook(@RequestParam(value="isbn", required=false) String isbn) {
+        ModelAndView modelAndView = new ModelAndView(VIEW_EDIT);
+        if (isbn == null) {
+            modelAndView.addObject("book", new BookForm());
+        } else {
+            Book book = bookService.findByIsbn(isbn);
+            BookForm bookForm = createBookForm(book);
+            modelAndView.addObject("book", bookForm);
+        }
+
+        return modelAndView;
     }
 
     @PostMapping(path = "/addBook")

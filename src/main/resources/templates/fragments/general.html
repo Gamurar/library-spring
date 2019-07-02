@@ -14,14 +14,14 @@
     <link rel="stylesheet" href="/webjars/font-awesome/5.9.0/css/all.min.css">
 </div>
 
-<div th:fragment="site-title">
+<div th:fragment="site-title" class="mb-5">
     <img class="d-block mx-auto mb-4" src="../static/images/bookshelf.png"
          th:src="@{/images/bookshelf.png}" alt=""
          width="72" height="72">
     <h1>Library</h1>
 </div>
 
-<table class="table table-striped mt-5 text-left" th:unless="${bookList.isEmpty()}" th:fragment="books-table">
+<table class="table table-striped mt-3 text-left" th:unless="${bookList.isEmpty()}" th:fragment="books-table">
     <thead>
     <tr>
         <th scope="col" id="book-table_first-col_title"></th>
@@ -36,7 +36,7 @@
     <tbody>
     <tr th:each="book : ${bookList}">
         <td scope="row" class="book-table_first-col_first-row">
-            <a th:href="@{/home(isbn=${book.isbn})}">
+            <a th:href="@{/edit(isbn=${book.isbn})}">
                 <i class="fas fa-edit"></i>
             </a>
         </td>
@@ -59,8 +59,11 @@
 
 <div class="row justify-content-md-center"  th:fragment="edit-book"
      th:with="isNew=${book.isbn == null} ? true : false">
-    <div class="col-md-8 col-12 col-lg-6">
-        <h4 class="mb-3" th:text="${isNew} ? #{add-book.title} : #{edit-book.title}"></h4>
+    <div class="col-md-8 col-12 col-lg-6 text-left">
+        <div class="row">
+            <h4 class="mb-3 col-10" th:text="${isNew} ? #{add-book.title} : #{edit-book.title}"></h4>
+            <button class="btn btn-danger col-2" th:unless="${isNew}">Delete</button>
+        </div>
         <form class="needs-validation" novalidate="" action="#" th:action="@{/addBook}" method="post">
 
             <div class="mb-3">
