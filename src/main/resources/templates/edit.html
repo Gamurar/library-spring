@@ -11,14 +11,9 @@
     <div th:replace="fragments/general.html :: style-links"></div>
 </head>
 <body>
-<div class="container mt-5">
-    <nav class="navbar navbar-light bg-light">
-        <a class="navbar-brand" th:href="@{/home}">
-            <img src="../static/images/bookshelf.png" width="30" height="30" class="d-inline-block align-top" alt="">
-            Library
-        </a>
-    </nav>
-    <div class="row justify-content-center">
+<div class="container">
+    <div th:replace="fragments/general.html ::  nav-bar"></div>
+    <div class="row justify-content-center mt-5">
         <div class="col-9">
 
 

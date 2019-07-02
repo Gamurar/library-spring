@@ -55,6 +55,11 @@ public class BookServiceImpl implements BookService {
         return repository.save(book);
     }
 
+    @Override
+    public void delete(BookForm bookForm) {
+        repository.deleteById(bookForm.getIsbn());
+    }
+
     private Book createBook(BookForm bookForm, Author author, Publisher publisher) {
         Set<Author> authors = new HashSet<>();
         authors.add(author);

@@ -64,13 +64,18 @@ public class HomeController {
         return modelAndView;
     }
 
-    @PostMapping(path = "/addBook")
+    @PostMapping(path = "/submit")
     public ModelAndView addBook(@ModelAttribute("newBook") BookForm bookForm,
+                                @RequestParam String action,
                                 BindingResult result) {
-        System.out.println("Request for saving the book is here...");
-        bookService.save(bookForm);
+        if (action.equals("save")) {
+            bookService.save(bookForm);
+        }
+        if (action.equals("delete")) {
+            bookService.delete(bookForm);
+        }
 
-        return showHome(null);
+        return new ModelAndView("redirect:/home");
     }
 
 
