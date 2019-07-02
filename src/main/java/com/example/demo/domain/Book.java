@@ -8,22 +8,15 @@ import java.util.Set;
 
 @Data
 @Entity
-@Table(name = "book")
 public class Book {
 
     @Id
-    @Column(name = "isbn")
     private String isbn;
-
-
-    @Column(name = "name")
     private String name;
-
 
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="publisher_id")
     private Publisher publisher;
-
 
     @ManyToMany(fetch = FetchType.LAZY,
             cascade = {
@@ -39,8 +32,6 @@ public class Book {
     @Column(name = "publish_year", columnDefinition="VARCHAR(4)")
     private String publishYear;
 
-
-    @Column(name = "copies")
     private Integer copies;
 
 }

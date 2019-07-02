@@ -12,15 +12,12 @@ import java.util.Set;
 @EqualsAndHashCode(exclude="books")
 @ToString(exclude = "books")
 @Entity
-@Table(name = "author")
 public class Author {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
     private Long id;
 
-    @Column(name = "name")
     private String name;
 
     @ManyToMany(fetch = FetchType.LAZY,
