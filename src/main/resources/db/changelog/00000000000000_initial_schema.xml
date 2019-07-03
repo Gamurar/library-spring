@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <property name="now" value="now()" dbms="h2"/>
+    <property name="now" value="current_timestamp" dbms="postgresql"/>
+
+    <changeSet id="00000000000001" author="esempla">
+        <createTable remarks="MPass" tableName="users">
+            <column name="id" type="BIGSERIAL" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="login" type="varchar(50)">
+                <constraints unique="true" nullable="false"/>
+            </column>
+            <column name="password_hash" type="varchar(60)"/>
+            <column name="first_name" type="varchar(50)"/>
+            <column name="last_name" type="varchar(50)"/>
+            <column name="email" type="varchar(100)">
+                <constraints unique="true" nullable="true"/>
+            </column>
+        </createTable>
+
+        <createIndex indexName="idx_user_login"
+                     tableName="users"
+                     unique="true">
+            <column name="login" type="varchar(50)"/>
+        </createIndex>
+
+        <createIndex indexName="idx_user_email"
+                     tableName="users"
+                     unique="true">
+            <column name="email" type="varchar(100)"/>
+        </createIndex>
+
+        <createTable remarks="MPass" tableName="authority">
+            <column name="name" type="varchar(50)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable remarks="MPass" tableName="users_authority">
+            <column name="user_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="authority_name" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="user_id, authority_name" tableName="users_authority"/>
+
+        <addForeignKeyConstraint baseColumnNames="authority_name"
+                                 baseTableName="users_authority"
+                                 constraintName="fk_authority_name"
+                                 referencedColumnNames="name"
+                                 referencedTableName="authority"/>
+
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="users_authority"
+                                 constraintName="fk_user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="users"/>
+
+        <loadData encoding="UTF-8"
+                  file="db/changelog/csv/users.csv"
+                  separator=";"
+                  tableName="users">
+        </loadData>
+
+        <loadData encoding="UTF-8"
+                  file="db/changelog/csv/authorities.csv"
+                  separator=";"
+                  tableName="authority"/>
+
+        <loadData encoding="UTF-8"
+                  file="db/changelog/csv/users_authorities.csv"
+                  separator=";"
+                  tableName="users_authority"/>
+
+        <createTable remarks="MPass" tableName="organizations">
+            <column name="id" type="BIGSERIAL" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(500)">
+                <constraints unique="true" nullable="false"/>
+            </column>
+            <column name="description" type="text"/>
+
+            <column name="status_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="created_by" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_date" type="timestamp" defaultValueDate="${now}">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_modified_by" type="varchar(50)"/>
+            <column name="last_modified_date" type="timestamp"/>
+        </createTable>
+
+        <loadData encoding="UTF-8"
+                  file="db/changelog/csv/organizations.csv"
+                  separator=";"
+                  tableName="organizations"/>
+
+        <createTable remarks="MPass" tableName="project_status">
+            <column name="id" type="BIGSERIAL" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(50)">
+                <constraints unique="true" nullable="false"/>
+            </column>
+        </createTable>
+
+        <loadData encoding="UTF-8"
+                  file="db/changelog/csv/project_status.csv"
+                  separator=";"
+                  tableName="project_status"/>
+
+        <createTable remarks="MPass" tableName="projects">
+            <column name="id" type="BIGSERIAL" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(500)">
+                <constraints unique="true" nullable="false"/>
+            </column>
+            <column name="description" type="text"/>
+
+            <column name="service_code" type="varchar(20)">
+                <constraints unique="true" nullable="false"/>
+            </column>
+
+            <column name="client_issuer" type="varchar(255)">
+                <constraints unique="true" nullable="false"/>
+            </column>
+
+            <column name="cert_path" type="varchar(500)"/>
+
+            <column name="cert_serial_nr" type="varchar(100)"/>
+
+            <column name="cert_expired_date" type="date"/>
+
+            <column name="organization_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="status_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="created_by" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_date" type="timestamp" defaultValueDate="${now}">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_modified_by" type="varchar(50)"/>
+            <column name="last_modified_date" type="timestamp"/>
+        </createTable>
+
+        <addForeignKeyConstraint baseColumnNames="organization_id"
+                                 baseTableName="projects"
+                                 constraintName="fk_projects_organization_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="organizations"/>
+
+        <addForeignKeyConstraint baseColumnNames="status_id"
+                                 baseTableName="projects"
+                                 constraintName="fk_projects_status_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="project_status"/>
+
+        <loadData encoding="UTF-8"
+                  file="db/changelog/csv/projects.csv"
+                  separator=";"
+                  tableName="projects"/>
+
+        <createTable remarks="MPass" tableName="mpass_requests">
+            <column name="request_session_id" type="varchar(100)">
+                <constraints primaryKey="true" unique="true" nullable="false"/>
+            </column>
+
+            <column name="request_session_index" type="varchar(100)" />
+
+            <column name="project_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="request_type" type="varchar(6)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="request" type="text">
+                <constraints nullable="false"/>
+            </column>
+            <column name="response" type="text"/>
+            <column name="created_by" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_date" type="timestamp" defaultValueDate="${now}">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_modified_by" type="varchar(50)"/>
+            <column name="last_modified_date" type="timestamp"/>
+        </createTable>
+
+        <addForeignKeyConstraint baseColumnNames="project_id"
+                                 baseTableName="mpass_requests"
+                                 constraintName="fk_project_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="projects"/>
+    </changeSet>
+</databaseChangeLog>

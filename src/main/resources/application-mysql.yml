@@ -4,5 +4,11 @@ spring:
     username: root
     password: 123qweASD
     driver-class-name: com.mysql.jdbc.Driver
+  liquibase:
+    change-log: classpath:db/master.xml
+    enabled: true
+    user: ${spring.datasource.username}
+    password: ${spring.datasource.password}
+    url: ${spring.datasource.url}
   jpa:
     database-platform: org.hibernate.dialect.MySQL5Dialect

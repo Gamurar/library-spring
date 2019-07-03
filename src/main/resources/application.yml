@@ -1,9 +1,13 @@
 spring:
   profiles:
-    active: mysql
+    active: h2
   jpa:
-    generate-ddl: true
+    show-sql: true
     hibernate:
-      ddl-auto: update
+      ddl-auto: none
+    properties:
+      hibernate.id.new_generator_mappings: true
+      hibernate.generate_statistics: false
+      hibernate.temp.use_jdbc_metadata_defaults: false
   messages:
     basename: i18n/messages
