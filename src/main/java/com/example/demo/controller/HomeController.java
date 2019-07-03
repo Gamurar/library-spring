@@ -7,6 +7,7 @@ import com.example.demo.domain.Book;
 import com.example.demo.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.WebRequest;
@@ -24,6 +25,7 @@ public class HomeController {
 
     private static final String VIEW_HOME = "home";
     private static final String VIEW_EDIT = "edit";
+    private static final String VIEW_CATALOG = "catalog";
 
     private BookService bookService;
 
@@ -51,6 +53,14 @@ public class HomeController {
         model.addObject("book", new BookForm());
 
         return model;
+    }
+
+    @GetMapping(path = "/catalog")
+    public ModelAndView showCatalog() {
+        ModelAndView modelAndView = new ModelAndView(VIEW_CATALOG);
+        modelAndView.addObject("books", bookService.findAll());
+
+        return modelAndView;
     }
 
     @GetMapping(path = "/edit")
