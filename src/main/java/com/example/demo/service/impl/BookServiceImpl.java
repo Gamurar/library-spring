@@ -1,5 +1,6 @@
 package com.example.demo.service.impl;
 
+import com.example.demo.domain.dto.AuthorForm;
 import com.example.demo.domain.dto.BookForm;
 import com.example.demo.domain.Author;
 import com.example.demo.domain.Book;
@@ -11,6 +12,7 @@ import com.example.demo.service.PublisherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -44,13 +46,13 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public Book save(BookForm bookForm) {
-        Author author = createAuthor(bookForm);
+        List<Author> authors = createAuthors(bookForm);
         Publisher publisher = createPublisher(bookForm);
 
-        author = authorService.save(author);
+        authors = authorService.saveAll(authors);
         publisher = publisherService.save(publisher);
 
-        Book book = createBook(bookForm, author, publisher);
+        Book book = createBook(bookForm, authors, publisher);
 
         return repository.save(book);
     }
@@ -60,9 +62,7 @@ public class BookServiceImpl implements BookService {
         repository.deleteById(bookForm.getIsbn());
     }
 
-    private Book createBook(BookForm bookForm, Author author, Publisher publisher) {
-        Set<Author> authors = new HashSet<>();
-        authors.add(author);
+    private Book createBook(BookForm bookForm, List<Author> authors, Publisher publisher) {
 
         Book book = new Book();
         book.setIsbn(bookForm.getIsbn());
@@ -75,11 +75,16 @@ public class BookServiceImpl implements BookService {
         return book;
     }
 
-    private Author createAuthor(BookForm bookForm) {
-        Author author = new Author();
-        author.setName(bookForm.getAuthor());
+    private List<Author> createAuthors(BookForm bookForm) {
+        List<Author> authors = new ArrayList<>();
+        for(AuthorForm authorForm : bookForm.getAuthors()) {
+            Author author = new Author();
+            author.setFirstName(authorForm.getFirstName());
+            author.setLastName(authorForm.getLastName());
+            authors.add(author);
+        }
 
-        return author;
+        return authors;
     }
 
     private Publisher createPublisher(BookForm bookForm) {

@@ -1,5 +1,7 @@
 package com.example.demo.controller;
 
+import com.example.demo.domain.Author;
+import com.example.demo.domain.dto.AuthorForm;
 import com.example.demo.domain.dto.BookForm;
 import com.example.demo.domain.Book;
 import com.example.demo.service.BookService;
@@ -12,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.net.http.HttpRequest;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -83,14 +86,24 @@ public class HomeController {
         BookForm bookForm = new BookForm();
         bookForm.setIsbn(book.getIsbn());
         bookForm.setName(book.getName());
-        //TODO: change to real authors
-        bookForm.setAuthor("Author");
         bookForm.setPublisher(book.getPublisher() != null ? book.getPublisher().getName() : "No publisher");
         bookForm.setPublishYear(book.getPublishYear());
         bookForm.setCopies(book.getCopies());
 
+        List<AuthorForm> authorForms = new ArrayList<>();
+        book.getAuthors().forEach(author -> authorForms.add(createAuthorForm(author)));
+        bookForm.setAuthors(authorForms);
+
         return bookForm;
 
+    }
+
+    private AuthorForm createAuthorForm(Author author) {
+        AuthorForm authorForm = new AuthorForm();
+        authorForm.setFirstName(author.getFirstName());
+        authorForm.setLastName(author.getLastName());
+
+        return authorForm;
     }
 
 

@@ -19,4 +19,8 @@ public class Client {
 
     @Column(name = "last_name")
     private String lastName;
+
+    private String address;
+
+    private String phone;
 }

@@ -1,19 +1,46 @@
+let authorsCounter = 1;
+
 function addAuthorField() {
 
     if ($(".extra-author-field").length <= 10) {
-        let authorInput = '<input type="text" class="form-control mt-3 extra-author-field" required="">';
-
-        $("#edit-book_author_fields").append(authorInput);
+        appendAuthorField(authorsCounter);
+        authorsCounter++;
     }
 }
 
 $( document ).ready(function() {
-    $(".btn-edit-book").click(function () {
-        let bookIsbn = $(this).parent().next().text();
-
-        let url = "/editBook/" + bookIsbn;
-
-        alert( url );
-        $("#edit-book__replace").load(url);
-    })
+    // let amountOfAuthors = $("#amount-of-authors").val();
+    // if (amountOfAuthors > 0) {
+    //     let i;
+    //     for (i = 1; i < amountOfAuthors; i++) {
+    //         appendExistedAuthorField(i);
+    //     }
+    // }
 });
+
+
+function appendAuthorField(authorId) {
+    let authorInput = '<div class="row mt-2"> ' +
+        '<div class="col"> ' +
+        '<input type="text" class="form-control" name="authors[' + authorId + '].firstName"> ' +
+        '</div> ' +
+        '<div class="col"> ' +
+        '<input type="text" class="form-control"  name="authors[' + authorId + '].lastName"> ' +
+        '</div> ' +
+        '</div>';
+
+    $("#edit-book_author_fields").append(authorInput);
+}
+
+// function appendExistedAuthorField(authorId) {
+//     let authorInput = '<div class="row mt-2"> ' +
+//         '<div class="col"> ' +
+//         '<input type="text" class="form-control" name="authors[' + authorId + '].firstName"> ' +
+//         '</div> ' +
+//         '<div class="col"> ' +
+//         '<input type="text" class="form-control"  name="authors[' + authorId + '].lastName"> ' +
+//         '</div> ' +
+//         '</div>';
+//
+//     $("#edit-book_author_fields__old").append(authorInput);
+// }

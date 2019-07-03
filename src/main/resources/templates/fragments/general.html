@@ -52,7 +52,7 @@
         <td th:text="${book.name}"></td>
         <td>
                                 <span th:each="author : ${book.authors}">
-                                    <span th:text="${author.name + ' '}"></span>
+                                    <span th:text="${author.firstName + ' ' + author.lastName + ','}"></span>
                                 </span>
 
         </td>
@@ -71,7 +71,8 @@
 
         <div class="row">
             <h4 class="mb-3 col-10" th:text="${isNew} ? #{add-book.title} : #{edit-book.title}"></h4>
-            <button class="btn btn-danger col-2" th:unless="${isNew}" name="action" value="delete" th:text="#{button.delete}"></button>
+            <button class="btn btn-danger col-2" th:unless="${isNew}" name="action" value="delete"
+                    th:text="#{button.delete}"></button>
         </div>
 
 
@@ -81,7 +82,7 @@
                 <input name="isbn" type="number" class="form-control" id="isbn"
                        th:placeholder="#{add-book.isbn.placeholder}" required="" th:field="${book.isbn}">
                 <div class="invalid-feedback" style="width: 100%;">
-                    Your username is required.
+                    Your username ISBN of the book.
                 </div>
             </div>
         </div>
@@ -90,7 +91,7 @@
             <input type="text" class="form-control" id="name" th:placeholder="#{add-book.book-name.placeholder}"
                    required="" th:field="${book.name}">
             <div class="invalid-feedback">
-                Please enter your shipping address.
+                Please enter book name.
             </div>
         </div>
         <div class="row">
@@ -99,7 +100,7 @@
                 <input type="text" class="form-control" id="publisher"
                        th:placeholder="#{add-book.publisher.placeholder}" required="" th:field="${book.publisher}">
                 <div class="invalid-feedback">
-                    Please enter your shipping address.
+                    Please enter publisher name.
                 </div>
             </div>
             <div class="col-md-4 mb-3">
@@ -108,18 +109,54 @@
                        th:placeholder="#{add-book.publish-year.placeholder}" required=""
                        th:field="${book.publishYear}">
                 <div class="invalid-feedback">
-                    Please enter your shipping address.
+                    Please enter publish year.
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-md-11 mb-3">
-                <label for="authors" th:text="#{book.authors.label}"></label>
-                <div id="edit-book_author_fields">
-                    <input type="text" class="form-control" id="authors"
-                           th:placeholder="#{add-book.authors.placeholder}" required="" th:field="${book.author}">
-                    <div class="invalid-feedback">
-                        Please enter your shipping address.
+                <label for="edit-book_author_fields" th:text="#{book.authors.label}"></label>
+                <input type="hidden" th:value="${book.authors.size()}" id="amount-of-authors">
+                <div id="edit-book_author_fields" th:if="${book.authors.size() == 0}">
+                    <div class="row">
+                        <div class="col">
+                            <input type="text" class="form-control"
+                                   th:placeholder="#{add-book.authors.first-name.placeholder}" required=""
+                                   th:field="${book.authors[0].firstName}">
+                            <div class="invalid-feedback">
+                                Please enter authors.
+                            </div>
+                        </div>
+                        <div class="col">
+                            <input type="text" class="form-control"
+                                   th:placeholder="#{add-book.authors.last-name.placeholder}" required=""
+                                   th:field="${book.authors[0].lastName}">
+                            <div class="invalid-feedback">
+                                Please enter authors.
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div th:each="author : ${book.authors}" id="edit-book_author_fields__old" th:if="${book.authors.size() > 1}">
+                    <div class="row">
+                        <div class="col">
+                            <input type="text" class="form-control"
+                                   th:placeholder="#{add-book.authors.first-name.placeholder}" required=""
+                                   th:field="${iter.current}">
+                            <div class="invalid-feedback">
+                                Please enter authors.
+                            </div>
+                        </div>
+                        <div class="col">
+                            <input type="text" class="form-control"
+                                   th:placeholder="#{add-book.authors.last-name.placeholder}" required=""
+                                   th:field="${iter.current}">
+                            <div class="invalid-feedback">
+                                Please enter authors.
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -134,10 +171,9 @@
             <input type="number" class="form-control" id="copies" th:placeholder="#{add-book.copies.placeholder}"
                    required="" th:field="${book.copies}">
             <div class="invalid-feedback">
-                Please enter your shipping address.
+                Please enter amount of copies.
             </div>
         </div>
-
 
         <button class="btn btn-primary btn-lg btn-block mt-5" type="submit"
                 th:text="${isNew} ? #{add-book.button.submit.label} : #{button.save}" name="action"
