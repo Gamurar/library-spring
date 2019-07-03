@@ -1,0 +1,246 @@
+# Create schema
+databaseChangeLog:
+  - preConditions:
+      - runningAs:
+          username: root
+
+  - changeSet:
+      id: 1
+      author: gamurar
+      changes:
+        - createTable:
+            tableName: publisher
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+
+        - createTable:
+            tableName: author
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: first_name
+                  type: varchar(45)
+              - column:
+                  name: last_name
+                  type: varchar(45)
+
+        - createTable:
+            tableName: book
+            columns:
+              - column:
+                  name: isbn
+                  type: varchar(13)
+                  autoIncrement: false
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: publisher_id
+                  type: int
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_book_publisher
+                    references: publisher(id)
+              - column:
+                  name: publish_year
+                  type: varchar(4)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: copies
+                  type: int
+                  defaultValue: 0
+                  constraints:
+                    nullable: false
+
+        - createTable:
+            tableName: book_author
+            columns:
+              - column:
+                  name: author_id
+                  type: int
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_author_id
+                    references: author(id)
+              - column:
+                  name: book_isbn
+                  type: varchar(13)
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_author_book_isbn
+                    references: book(isbn)
+
+        - createTable:
+            tableName: client
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: first_name
+                  type: varchar(45)
+              - column:
+                  name: last_name
+                  type: varchar(45)
+              - column:
+                  name: address
+                  type: varchar(50)
+              - column:
+                  name: phone
+                  type: varchar(31)
+
+        - createTable:
+            tableName: borrowed_book
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: book_isbn
+                  type: varchar(13)
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_borrowed_book_isbn
+                    references: book(isbn)
+              - column:
+                  name: client_id
+                  type: int
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_borrow_client_id
+                    references: client(id)
+              - column:
+                  name: borrow_date
+                  type: date
+                  constraints:
+                    nullable: false
+
+        - createTable:
+            tableName: user
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: username
+                  type: varchar(100)
+              - column:
+                  name: password
+                  type: varchar(100)
+
+        - createTable:
+            tableName: authority
+            columns:
+              - column:
+                  name: name
+                  type: varchar(50)
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+
+        - createTable:
+            tableName: user_authority
+            columns:
+              - column:
+                  name: user_id
+                  type: int
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                    foreignKeyName: fk_user_id
+                    references: user(id)
+              - column:
+                  name: authority_name
+                  type: varchar(50)
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                    foreignKeyName: fk_authority_name
+                    references: authority(name)
+
+
+
+
+# Insert values
+        - loadData:
+            encoding: UTF-8
+            file: db/changelog/csv/author.csv
+            separator: ;
+            tableName: author
+
+        - loadData:
+            encoding: UTF-8
+            file: db/changelog/csv/publisher.csv
+            separator: ;
+            tableName: publisher
+
+        - loadData:
+            encoding: UTF-8
+            file: db/changelog/csv/client.csv
+            separator: ;
+            tableName: client
+
+        - loadData:
+            encoding: UTF-8
+            file: db/changelog/csv/book.csv
+            separator: ;
+            tableName: book
+
+        - loadData:
+            encoding: UTF-8
+            file: db/changelog/csv/book_author.csv
+            separator: ;
+            tableName: book_author
+
+        - loadData:
+            encoding: UTF-8
+            file: db/changelog/csv/user.csv
+            separator: ;
+            tableName: user
+
+        - loadData:
+            encoding: UTF-8
+            file: db/changelog/csv/authority.csv
+            separator: ;
+            tableName: authority
+
+        - loadData:
+            encoding: UTF-8
+            file: db/changelog/csv/user_authority.csv
+            separator: ;
+            tableName: user_authority

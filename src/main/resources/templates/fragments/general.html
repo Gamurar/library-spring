@@ -117,7 +117,7 @@
             <div class="col-md-11 mb-3">
                 <label for="edit-book_author_fields" th:text="#{book.authors.label}"></label>
                 <input type="hidden" th:value="${book.authors.size()}" id="amount-of-authors">
-                <div id="edit-book_author_fields" th:if="${book.authors.size() == 0}">
+                <div id="edit-book_author_fields">
                     <div class="row">
                         <div class="col">
                             <input type="text" class="form-control"
@@ -131,27 +131,6 @@
                             <input type="text" class="form-control"
                                    th:placeholder="#{add-book.authors.last-name.placeholder}" required=""
                                    th:field="${book.authors[0].lastName}">
-                            <div class="invalid-feedback">
-                                Please enter authors.
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-                <div th:each="author : ${book.authors}" id="edit-book_author_fields__old" th:if="${book.authors.size() > 1}">
-                    <div class="row">
-                        <div class="col">
-                            <input type="text" class="form-control"
-                                   th:placeholder="#{add-book.authors.first-name.placeholder}" required=""
-                                   th:field="${iter.current}">
-                            <div class="invalid-feedback">
-                                Please enter authors.
-                            </div>
-                        </div>
-                        <div class="col">
-                            <input type="text" class="form-control"
-                                   th:placeholder="#{add-book.authors.last-name.placeholder}" required=""
-                                   th:field="${iter.current}">
                             <div class="invalid-feedback">
                                 Please enter authors.
                             </div>

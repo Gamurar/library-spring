@@ -1,8 +1,8 @@
 spring:
   datasource:
-    username: sa
+    username: root
     password:
-    url: jdbc:h2:~/h2/library;DB_CLOSE_DELAY=-1
+    url: jdbc:h2:mem:testdb
     driver-class-name: org.h2.Driver
   liquibase:
     change-log: classpath:db/master.xml

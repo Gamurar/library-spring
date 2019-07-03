@@ -14,6 +14,7 @@ public class Book {
 
     @Id
     private String isbn;
+
     private String name;
 
     @ManyToOne(fetch=FetchType.LAZY)

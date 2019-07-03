@@ -8,8 +8,6 @@ import javax.persistence.*;
 @Entity
 public class Authority {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
     @Enumerated(EnumType.STRING)
     private AuthorityType name;
     public Authority() {}
