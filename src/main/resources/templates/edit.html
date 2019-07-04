@@ -16,7 +16,17 @@
     <div class="row justify-content-center mt-5">
         <div class="col-9">
 
-            <div th:replace="fragments/edit-forms.html :: ${page.equals('book')} ? 'edit-book' : 'edit-author'"></div>
+            <th:block th:switch="${page}">
+                <div th:case="'book'">
+                    <div th:replace="fragments/edit-forms.html :: edit-book"></div>
+                </div>
+                <div th:case="'author'">
+                    <div th:replace="fragments/edit-forms.html :: edit-author"></div>
+                </div>
+                <div th:case="'publisher'">
+                    <div th:replace="fragments/edit-forms.html :: edit-publisher"></div>
+                </div>
+            </th:block>
 
         </div>
     </div>

@@ -23,6 +23,13 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
+    public Author save(AuthorForm authorForm) {
+        Author author = createAuthor(authorForm);
+
+        return repository.save(author);
+    }
+
+    @Override
     public List<Author> saveAll(Iterable<Author> authors) {
         return repository.saveAll(authors);
     }
@@ -33,12 +40,25 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
+    public void deleteById(Long id) {
+        repository.deleteById(id);
+    }
+
+    @Override
     public AuthorForm createAuthorForm(Author author) {
         AuthorForm authorForm = new AuthorForm();
         authorForm.setFirstName(author.getFirstName());
         authorForm.setLastName(author.getLastName());
 
         return authorForm;
+    }
+
+    private Author createAuthor(AuthorForm authorForm) {
+        Author author = new Author();
+        author.setFirstName(authorForm.getFirstName());
+        author.setLastName(authorForm.getLastName());
+
+        return author;
     }
 
 

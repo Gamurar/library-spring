@@ -1,31 +1,23 @@
 package com.example.demo.controller;
 
-import com.example.demo.domain.Author;
-import com.example.demo.domain.dto.AuthorForm;
-import com.example.demo.domain.dto.BookForm;
 import com.example.demo.domain.Book;
+import com.example.demo.domain.dto.BookForm;
 import com.example.demo.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
-import java.net.http.HttpRequest;
-import java.util.ArrayList;
 import java.util.List;
+
+import static com.example.demo.utils.Constants.VIEW_CATALOG;
+import static com.example.demo.utils.Constants.VIEW_HOME;
 
 @Controller
 @RequestMapping("/")
 public class HomeController {
-
-
-    private static final String VIEW_HOME = "all-books";
-    private static final String VIEW_EDIT = "edit";
-    private static final String VIEW_CATALOG = "catalog";
 
     private BookService bookService;
 
@@ -63,34 +55,6 @@ public class HomeController {
         return modelAndView;
     }
 
-    @GetMapping(path = "/edit")
-    public ModelAndView editBook(@RequestParam(value="isbn", required=false) String isbn) {
-        ModelAndView modelAndView = new ModelAndView(VIEW_EDIT);
-        if (isbn == null) {
-            modelAndView.addObject("book", new BookForm());
-        } else {
-            Book book = bookService.findByIsbn(isbn);
-            BookForm bookForm = bookService.createBookForm(book);
-            modelAndView.addObject("book", bookForm);
-        }
-
-        modelAndView.addObject("page", "book");
-        return modelAndView;
-    }
-
-    @PostMapping(path = "/submit")
-    public ModelAndView addBook(@ModelAttribute("newBook") BookForm bookForm,
-                                @RequestParam String action,
-                                BindingResult result) {
-        if (action.equals("save")) {
-            bookService.save(bookForm);
-        }
-        if (action.equals("delete")) {
-            bookService.delete(bookForm);
-        }
-
-        return new ModelAndView("redirect:/home");
-    }
 
 
 
