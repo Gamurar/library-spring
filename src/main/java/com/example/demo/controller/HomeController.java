@@ -36,8 +36,8 @@ public class HomeController {
     }
 
 
-    @GetMapping(path = {"/home", "/"})
-    public ModelAndView showHome(@RequestParam(value="isbn", required=false) String isbn) {
+    @GetMapping(path = "/register")
+    public ModelAndView getRegisterPage(@RequestParam(value="isbn", required=false) String isbn) {
         ModelAndView model = new ModelAndView(VIEW_HOME);
 
         if (isbn != null) {
@@ -55,8 +55,8 @@ public class HomeController {
         return model;
     }
 
-    @GetMapping(path = "/catalog")
-    public ModelAndView showCatalog() {
+    @GetMapping(path = {"/home", "/"})
+    public ModelAndView getCatalogPage() {
         ModelAndView modelAndView = new ModelAndView(VIEW_CATALOG);
         modelAndView.addObject("books", bookService.findAll());
 
