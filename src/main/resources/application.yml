@@ -11,3 +11,7 @@ spring:
       hibernate.temp.use_jdbc_metadata_defaults: false
   messages:
     basename: i18n/messages
+
+  mvc:
+    servlet:
+      load-on-startup: 1

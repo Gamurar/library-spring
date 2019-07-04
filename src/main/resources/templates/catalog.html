@@ -9,6 +9,7 @@
     <title>Home</title>
 
     <div th:replace="fragments/general.html :: style-links"></div>
+<!--    <link rel="stylesheet" th:href="@{/static/css/main.css}"/>-->
 </head>
 <body>
 
@@ -24,13 +25,16 @@
 
                     <div class="row">
                         <div th:each="book : ${books}" class="card col-2 m-3" style="width: 18rem;">
-                            <img th:src="${book.picture}" class="card-img-top" th:alt-title="book.name">
-                            <div class="card-body">
-                                <h5 th:text="${book.name}" class="card-title"></h5>
-                                <p class="card-text">
-                                    <span th:each="author : ${book.authors}" th:text="${author.firstName + ' ' + author.lastName + ', '}"></span>
-                                </p>
-                            </div>
+                            <a href="#">
+                                <img th:src="${book.picture}" class="card-img-top" th:alt-title="${book.name}">
+                                <div class="card-body">
+                                    <h5 th:text="${book.name}" class="card-title"></h5>
+                                    <p class="card-text">
+                                        <span th:each="author : ${book.authors}"
+                                              th:text="${author.firstName + ' ' + author.lastName + ', '}"></span>
+                                    </p>
+                                </div>
+                            </a>
                         </div>
                     </div>
 

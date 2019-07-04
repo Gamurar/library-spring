@@ -11,7 +11,7 @@
 <!-------------------------== Style links ==-------------------------->
 <th:block th:fragment="style-links">
     <link rel="stylesheet" href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="/static/css/main.css"/>
+    <link rel="stylesheet" href="/resources/css/main.css"/>
     <link rel="stylesheet" href="/webjars/font-awesome/5.9.0/css/all.min.css">
 </th:block>
 
@@ -43,8 +43,7 @@
 
 <!-------------------------== Site title ==-------------------------->
 <div th:fragment="site-title" class="mb-5">
-    <img class="d-block mx-auto mb-4" src="../static/images/bookshelf.png"
-         th:src="@{/images/bookshelf.png}" alt=""
+    <img class="d-block mx-auto mb-4" src="/resources/images/bookshelf.svg" alt=""
          width="72" height="72">
     <h1>Library</h1>
 </div>
@@ -90,7 +89,7 @@
     <script type="text/javascript" src="/webjars/jquery/3.0.0/jquery.min.js"></script>
     <script type="text/javascript" src="/webjars/popper.js/1.14.3/popper.min.js"></script>
     <script type="text/javascript" src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="../static/js/script.js" ></script>
+    <script type="text/javascript" src="/resources/js/script.js" ></script>
 </th:block>
 </body>
 </html>
