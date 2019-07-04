@@ -74,6 +74,9 @@ databaseChangeLog:
                   defaultValue: 0
                   constraints:
                     nullable: false
+              - column:
+                  name: picture
+                  type: varchar(255)
 
         - createTable:
             tableName: book_author

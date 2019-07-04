@@ -37,4 +37,6 @@ public class Book {
 
     private Integer copies;
 
+    private String picture;
+
 }

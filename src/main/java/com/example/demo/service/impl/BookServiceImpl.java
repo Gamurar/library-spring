@@ -71,6 +71,7 @@ public class BookServiceImpl implements BookService {
         book.setCopies(bookForm.getCopies());
         book.setAuthors(authors);
         book.setPublisher(publisher);
+        book.setPicture(bookForm.getPicture());
 
         return book;
     }
