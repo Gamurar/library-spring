@@ -23,7 +23,7 @@ import java.util.List;
 public class HomeController {
 
 
-    private static final String VIEW_HOME = "home";
+    private static final String VIEW_HOME = "all-books";
     private static final String VIEW_EDIT = "edit";
     private static final String VIEW_CATALOG = "catalog";
 
@@ -36,8 +36,8 @@ public class HomeController {
     }
 
 
-    @GetMapping(path = "/register")
-    public ModelAndView getRegisterPage(@RequestParam(value="isbn", required=false) String isbn) {
+    @GetMapping(path = "/all-books")
+    public ModelAndView getAllBooksPage(@RequestParam(value="isbn", required=false) String isbn) {
         ModelAndView model = new ModelAndView(VIEW_HOME);
 
         if (isbn != null) {
