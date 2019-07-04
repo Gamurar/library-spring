@@ -8,24 +8,15 @@
 </head>
 <body>
 
-<div th:fragment="style-links">
-    <link rel="stylesheet" th:href="@{webjars/bootstrap/4.3.1/css/bootstrap.min.css}"/>
-    <link rel="stylesheet" th:href="@{/css/main.css}"/>
+<!-------------------------== Style links ==-------------------------->
+<th:block th:fragment="style-links">
+    <link rel="stylesheet" href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/static/css/main.css"/>
     <link rel="stylesheet" href="/webjars/font-awesome/5.9.0/css/all.min.css">
-</div>
+</th:block>
 
-<!--<nav  class="navbar navbar-light bg-light">-->
-<!--    <a class="navbar-brand" th:href="@{/home}">-->
-<!--        <img src="../static/images/bookshelf.png" width="30" height="30" class="d-inline-block align-top" alt="">-->
-<!--        Library-->
-<!--    </a>-->
-<!--    <a href="#">Add a book</a>-->
-<!--    <a href="#">Add an author</a>-->
-<!--    <a href="#">Add a publisher</a>-->
-<!--    -->
 
-<!--</nav>-->
-
+<!-------------------------== Nav bar ==-------------------------->
 <nav th:fragment="nav-bar" class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" th:href="@{/}" th:text="#{nav.brand.label}"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -38,9 +29,9 @@
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" th:text="#{nav.add.label}">
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#" th:text="#{nav.add-book.label}"></a>
+                    <a class="dropdown-item" th:href="@{/edit}" th:text="#{nav.add-book.label}"></a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#" th:text="#{nav.add-author.label}">Another action</a>
+                    <a class="dropdown-item" th:href="@{/edit/author}" th:text="#{nav.add-author.label}">Another action</a>
                     <a class="dropdown-item" href="#" th:text="#{nav.add-publisher.label}">Another action</a>
                 </div>
             </li>
@@ -49,6 +40,8 @@
     </div>
 </nav>
 
+
+<!-------------------------== Site title ==-------------------------->
 <div th:fragment="site-title" class="mb-5">
     <img class="d-block mx-auto mb-4" src="../static/images/bookshelf.png"
          th:src="@{/images/bookshelf.png}" alt=""
@@ -56,6 +49,8 @@
     <h1>Library</h1>
 </div>
 
+
+<!-------------------------== Books table ==-------------------------->
 <table class="table table-striped mt-3 text-left" th:unless="${bookList.isEmpty()}" th:fragment="books-table">
     <thead>
     <tr>
@@ -90,109 +85,12 @@
     </tbody>
 </table>
 
-
-<div class="row justify-content-md-center" th:fragment="edit-book"
-     th:with="isNew=${book.isbn == null} ? true : false">
-    <form class="needs-validation col-md-8 col-12 col-lg-6 text-left" novalidate="" action="#" th:action="@{/submit}"
-          method="post">
-
-        <div class="row">
-            <h4 class="mb-3 col-10" th:text="${isNew} ? #{add-book.title} : #{edit-book.title}"></h4>
-            <button class="btn btn-danger col-2" th:unless="${isNew}" name="action" value="delete"
-                    th:text="#{button.delete}"></button>
-        </div>
-
-
-        <div class="mb-3">
-            <label for="isbn" th:text="#{book.isbn.label}"></label>
-            <div class="input-group">
-                <input name="isbn" type="number" class="form-control" id="isbn"
-                       th:placeholder="#{add-book.isbn.placeholder}" required="" th:field="${book.isbn}">
-                <div class="invalid-feedback" style="width: 100%;">
-                    Your username ISBN of the book.
-                </div>
-            </div>
-        </div>
-        <div class="mb-3">
-            <label for="name" th:text="#{book.book-name.label}"></label>
-            <input type="text" class="form-control" id="name" th:placeholder="#{add-book.book-name.placeholder}"
-                   required="" th:field="${book.name}">
-            <div class="invalid-feedback">
-                Please enter book name.
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-8 mb-3">
-                <label for="publisher" th:text="#{book.publisher.label}"></label>
-                <input type="text" class="form-control" id="publisher"
-                       th:placeholder="#{add-book.publisher.placeholder}" required="" th:field="${book.publisher}">
-                <div class="invalid-feedback">
-                    Please enter publisher name.
-                </div>
-            </div>
-            <div class="col-md-4 mb-3">
-                <label for="publish-year" th:text="#{book.publish-year.label}"></label>
-                <input type="number" class="form-control" id="publish-year"
-                       th:placeholder="#{add-book.publish-year.placeholder}" required=""
-                       th:field="${book.publishYear}">
-                <div class="invalid-feedback">
-                    Please enter publish year.
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-11 mb-3">
-                <label for="edit-book_author_fields" th:text="#{book.authors.label}"></label>
-                <input type="hidden" th:value="${book.authors.size()}" id="amount-of-authors">
-                <div id="edit-book_author_fields">
-                    <div class="row">
-                        <div class="col">
-                            <input type="text" class="form-control"
-                                   th:placeholder="#{add-book.authors.first-name.placeholder}" required=""
-                                   th:field="${book.authors[0].firstName}">
-                            <div class="invalid-feedback">
-                                Please enter authors.
-                            </div>
-                        </div>
-                        <div class="col">
-                            <input type="text" class="form-control"
-                                   th:placeholder="#{add-book.authors.last-name.placeholder}" required=""
-                                   th:field="${book.authors[0].lastName}">
-                            <div class="invalid-feedback">
-                                Please enter authors.
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-1 mt-4">
-                <button type="button" class="btn btn-link" onclick="addAuthorField()">
-                    <i class="fas fa-plus"></i>
-                </button>
-            </div>
-        </div>
-        <div class="mb-3">
-            <label for="copies" th:text="#{book.copies.label}"></label>
-            <input type="number" class="form-control" id="copies" th:placeholder="#{add-book.copies.placeholder}"
-                   required="" th:field="${book.copies}">
-            <div class="invalid-feedback">
-                Please enter amount of copies.
-            </div>
-        </div>
-
-        <button class="btn btn-primary btn-lg btn-block mt-5" type="submit"
-                th:text="${isNew} ? #{add-book.button.submit.label} : #{button.save}" name="action"
-                value="save"></button>
-    </form>
-</div>
-
-
-<div th:fragment="script-links">
-    <script type="text/javascript" th:src="@{/webjars/jquery/3.0.0/jquery.min.js}"></script>
-    <script type="text/javascript" th:src="@{/webjars/popper.js/1.14.3/popper.min.js}"></script>
-    <script type="text/javascript" th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
-    <script type="text/javascript" src="../static/js/script.js" th:src="@{/js/script.js}"></script>
-</div>
+<!-------------------------== Script links ==-------------------------->
+<th:block th:fragment="script-links">
+    <script type="text/javascript" src="/webjars/jquery/3.0.0/jquery.min.js"></script>
+    <script type="text/javascript" src="/webjars/popper.js/1.14.3/popper.min.js"></script>
+    <script type="text/javascript" src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../static/js/script.js" ></script>
+</th:block>
 </body>
 </html>

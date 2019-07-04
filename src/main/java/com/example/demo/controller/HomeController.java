@@ -42,7 +42,7 @@ public class HomeController {
 
         if (isbn != null) {
             Book book = bookService.findByIsbn(isbn);
-            BookForm bookForm = createBookForm(book);
+            BookForm bookForm = bookService.createBookForm(book);
             model.addObject("book", bookForm);
 
             return model;
@@ -70,10 +70,11 @@ public class HomeController {
             modelAndView.addObject("book", new BookForm());
         } else {
             Book book = bookService.findByIsbn(isbn);
-            BookForm bookForm = createBookForm(book);
+            BookForm bookForm = bookService.createBookForm(book);
             modelAndView.addObject("book", bookForm);
         }
 
+        modelAndView.addObject("page", "book");
         return modelAndView;
     }
 
@@ -92,29 +93,6 @@ public class HomeController {
     }
 
 
-    private BookForm createBookForm(Book book) {
-        BookForm bookForm = new BookForm();
-        bookForm.setIsbn(book.getIsbn());
-        bookForm.setName(book.getName());
-        bookForm.setPublisher(book.getPublisher() != null ? book.getPublisher().getName() : "No publisher");
-        bookForm.setPublishYear(book.getPublishYear());
-        bookForm.setCopies(book.getCopies());
-
-        List<AuthorForm> authorForms = new ArrayList<>();
-        book.getAuthors().forEach(author -> authorForms.add(createAuthorForm(author)));
-        bookForm.setAuthors(authorForms);
-
-        return bookForm;
-
-    }
-
-    private AuthorForm createAuthorForm(Author author) {
-        AuthorForm authorForm = new AuthorForm();
-        authorForm.setFirstName(author.getFirstName());
-        authorForm.setLastName(author.getLastName());
-
-        return authorForm;
-    }
 
 
 }

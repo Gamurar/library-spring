@@ -62,6 +62,22 @@ public class BookServiceImpl implements BookService {
         repository.deleteById(bookForm.getIsbn());
     }
 
+    @Override
+    public BookForm createBookForm(Book book) {
+        BookForm bookForm = new BookForm();
+        bookForm.setIsbn(book.getIsbn());
+        bookForm.setName(book.getName());
+        bookForm.setPublisher(book.getPublisher() != null ? book.getPublisher().getName() : "No publisher");
+        bookForm.setPublishYear(book.getPublishYear());
+        bookForm.setCopies(book.getCopies());
+
+        List<AuthorForm> authorForms = new ArrayList<>();
+        book.getAuthors().forEach(author -> authorForms.add(authorService.createAuthorForm(author)));
+        bookForm.setAuthors(authorForms);
+
+        return bookForm;
+    }
+
     private Book createBook(BookForm bookForm, List<Author> authors, Publisher publisher) {
 
         Book book = new Book();

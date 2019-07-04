@@ -14,4 +14,6 @@ public interface BookService {
     Book save(BookForm bookForm);
 
     void delete(BookForm bookForm);
+
+    BookForm createBookForm(Book book);
 }

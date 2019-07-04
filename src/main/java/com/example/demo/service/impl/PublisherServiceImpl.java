@@ -1,6 +1,7 @@
 package com.example.demo.service.impl;
 
 import com.example.demo.domain.Publisher;
+import com.example.demo.domain.dto.PublisherForm;
 import com.example.demo.repository.PublisherRepository;
 import com.example.demo.service.PublisherService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,5 +20,13 @@ public class PublisherServiceImpl implements PublisherService {
     @Override
     public Publisher save(Publisher publisher) {
         return repository.save(publisher);
+    }
+
+    @Override
+    public PublisherForm createPublisherForm(Publisher publisher) {
+        PublisherForm publisherForm = new PublisherForm();
+        publisherForm.setName(publisher.getName());
+
+        return publisherForm;
     }
 }
