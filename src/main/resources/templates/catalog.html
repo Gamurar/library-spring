@@ -24,7 +24,7 @@
                     <div th:replace="fragments/general.html :: site-title"></div>
 
                     <div class="row">
-                        <div th:each="book : ${books}" class="card col-2 m-3" style="width: 18rem;">
+                        <div th:each="book : ${books}" class="card col-2 m-3 book-card">
                             <a href="#">
                                 <img th:src="${book.picture}" class="card-img-top" th:alt-title="${book.name}">
                                 <div class="card-body">
