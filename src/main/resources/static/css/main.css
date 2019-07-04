@@ -15,11 +15,13 @@
     font-size: 1.5rem;
 }
 
-.book-detail__author-list {
+.book-detail__author-list, .catalog__card__authors-list {
     font-size: 0;
 }
 
-.book-detail__author-list span, .book-detail__author-list a {
+.book-detail__author-list span,
+.book-detail__author-list a,
+.catalog__card__authors-list span {
     font-size: 1rem;
 }
 

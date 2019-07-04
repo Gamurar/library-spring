@@ -47,6 +47,7 @@ public class AuthorServiceImpl implements AuthorService {
     @Override
     public AuthorForm createAuthorForm(Author author) {
         AuthorForm authorForm = new AuthorForm();
+        authorForm.setId(author.getId());
         authorForm.setFirstName(author.getFirstName());
         authorForm.setLastName(author.getLastName());
 

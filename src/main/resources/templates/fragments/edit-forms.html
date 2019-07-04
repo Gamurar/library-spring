@@ -15,8 +15,8 @@
           method="post">
 
         <div class="row">
-            <h4 class="mb-3 col-10" th:text="${isNew} ? #{add-author.title} : #{edit-author.title}"></h4>
-            <button class="btn btn-danger col-2" th:unless="${isNew}" name="action" value="delete"
+            <h4 class="mb-3 col-11" th:text="${isNew} ? #{add-author.title} : #{edit-author.title}"></h4>
+            <button class="btn btn-danger col-1" th:unless="${isNew}" name="action" value="delete"
                     th:text="#{button.delete}"></button>
         </div>
 
@@ -47,8 +47,8 @@
           method="post">
 
         <div class="row">
-            <h4 class="mb-3 col-10" th:text="${isNew} ? #{add-publisher.title} : #{edit-publisher.title}"></h4>
-            <button class="btn btn-danger col-2" th:unless="${isNew}" name="action" value="delete"
+            <h4 class="mb-3 col-11" th:text="${isNew} ? #{add-publisher.title} : #{edit-publisher.title}"></h4>
+            <button class="btn btn-danger col-1" th:unless="${isNew}" name="action" value="delete"
                     th:text="#{button.delete}"></button>
         </div>
 
@@ -76,17 +76,17 @@
 <!--TODO: add picture field-->
 <div class="row justify-content-md-center" th:fragment="edit-book"
      th:with="isNew=${book.isbn == null} ? true : false">
-    <form class="needs-validation col-md-8 col-12 col-lg-6 text-left" novalidate="" action="#" th:action="@{/edit/book}"
+    <form class="needs-validation col-md-8 col-12 col-lg-12 text-left" novalidate="" action="#" th:action="@{/edit/book}"
           method="post">
 
         <div class="row">
-            <h4 class="mb-3 col-10" th:text="${isNew} ? #{add-book.title} : #{edit-book.title}"></h4>
-            <button class="btn btn-danger col-2" th:unless="${isNew}" name="action" value="delete"
+            <h4 class="mb-3 col-11" th:text="${isNew} ? #{add-book.title} : #{edit-book.title}"></h4>
+            <button class="btn btn-danger col-1" th:unless="${isNew}" name="action" value="delete"
                     th:text="#{button.delete}"></button>
         </div>
 
 
-        <div class="mb-3">
+        <div class="my-3">
             <label for="isbn" th:text="#{book.isbn.label}"></label>
             <div class="input-group">
                 <input name="isbn" type="number" class="form-control" id="isbn"
@@ -164,7 +164,7 @@
             </div>
         </div>
 
-        <button class="btn btn-primary btn-lg btn-block mt-5" type="submit"
+        <button class="btn btn-primary btn-lg btn-block mt-5  col-2" type="submit"
                 th:text="#{button.save}" name="action"
                 value="save"></button>
     </form>

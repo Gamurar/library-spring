@@ -42,6 +42,7 @@ public class PublisherServiceImpl implements PublisherService {
     @Override
     public PublisherForm createPublisherForm(Publisher publisher) {
         PublisherForm publisherForm = new PublisherForm();
+        publisherForm.setId(publisher.getId());
         publisherForm.setName(publisher.getName());
 
         return publisherForm;

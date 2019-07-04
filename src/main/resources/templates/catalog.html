@@ -25,9 +25,12 @@
                         <img th:src="${book.picture}" class="card-img-top" th:alt-title="${book.name}">
                         <div class="card-body">
                             <h5 th:text="${book.name}" class="card-title"></h5>
-                            <p class="card-text">
-                                        <span th:each="author : ${book.authors}"
-                                              th:text="${author.firstName + ' ' + author.lastName + ', '}"></span>
+                            <p class="card-text catalog__card__authors-list">
+                                <th:block th:each="author, iter : ${book.authors}">
+                                    <span th:text="${author.firstName + ' ' + author.lastName}"></span>
+                                    <span th:unless="${iter.last}">, </span>
+                                </th:block>
+
                             </p>
                         </div>
                     </a>

@@ -24,7 +24,7 @@
             <h6 class="book-detail__author-list">
                 <span>by </span>
                 <th:block th:each="author, iter : ${book.authors}">
-                    <a href="#" th:text="${author.firstName + ' ' + author.lastName}"></a>
+                    <a th:href="@{/edit/author(id=${author.id})}" th:text="${author.firstName + ' ' + author.lastName}"></a>
                     <span th:unless="${iter.last}">, </span>
                 </th:block>
             </h6>
@@ -34,11 +34,15 @@
                 <ul class="pl-3 pt-2">
                     <li>
                         <span class="font-weight-bolder" th:text="#{book.details.publisher.label} + ': '"></span>
-                        <span th:text="${book.publisher.name}"></span>
+                        <a th:href="@{/edit/publisher(id=${book.publisher.id})}" th:text="${book.publisher.name}"></a>
                     </li>
                     <li>
                         <span class="font-weight-bolder" th:text="#{book.details.publish-year.label} + ': '"></span>
                         <span th:text="${book.publishYear}"></span>
+                    </li>
+                    <li>
+                        <span class="font-weight-bolder" th:text="#{book.isbn.label} + ': '"></span>
+                        <span th:text="${book.isbn}"></span>
                     </li>
                     <li>
                         <span class="font-weight-bolder" th:text="#{book.details.copies-left.label} + ': '"></span>
@@ -49,7 +53,7 @@
 
             <div class="book-detail__buttons">
                 <button class="btn btn-primary mr-3 w-25">Borrow</button>
-                <button class="btn btn-primary">Edit</button>
+                <a th:href="@{/edit/book(isbn=${book.isbn})}" class="btn btn-primary">Edit</a>
             </div>
         </div>
 
