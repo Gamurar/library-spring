@@ -30,7 +30,7 @@ public class PublisherServiceImpl implements PublisherService {
     @Override
     public Publisher save(PublisherForm publisherForm) {
         Publisher publisher = new Publisher();
-        if (publisherForm.getId() != -1) {
+        if (publisherForm.getId() != -1L) {
             publisher.setId(publisherForm.getId());
         }
 

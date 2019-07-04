@@ -56,6 +56,9 @@ public class AuthorServiceImpl implements AuthorService {
 
     private Author createAuthor(AuthorForm authorForm) {
         Author author = new Author();
+        if (authorForm.getId() != -1L) {
+            author.setId(authorForm.getId());
+        }
         author.setFirstName(authorForm.getFirstName());
         author.setLastName(authorForm.getLastName());
 
