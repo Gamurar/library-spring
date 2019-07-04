@@ -1,7 +1,9 @@
 package com.example.demo.utils;
 
 public interface Constants {
-    public static final String VIEW_HOME = "all-books";
-    public static final String VIEW_EDIT = "edit";
-    public static final String VIEW_CATALOG = "catalog";
+    String VIEW_HOME = "all-books";
+    String VIEW_EDIT = "edit";
+    String VIEW_CATALOG = "catalog";
+    String VIEW_BOOK_DETAIL = "book-detail";
+
 }

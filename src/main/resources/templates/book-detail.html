@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Home</title>
+
+    <div th:replace="fragments/general.html :: style-links"></div>
+</head>
+<body>
+
+<div class="container">
+    <div th:replace="fragments/general.html ::  nav-bar"></div>
+    <div class="row justify-content-left mt-5 mx-3">
+        <div class="col-4 book-detail__book-cover-img">
+            <img th:src="'/' + ${book.picture}" class="rounded float-left w-100" th:alt-title="${book.name}">
+        </div>
+
+        <div class="col-6 ml-5 mt-3">
+            <h1 th:text="${book.name}" class="font-weight-bold boot-detail__book-name"></h1>
+            <h6 class="book-detail__author-list">
+                <span>by </span>
+                <th:block th:each="author, iter : ${book.authors}">
+                    <a href="#" th:text="${author.firstName + ' ' + author.lastName}"></a>
+                    <span th:unless="${iter.last}">, </span>
+                </th:block>
+            </h6>
+
+            <div class="mt-5 book-detail__details-block">
+                <span th:text="#{book.details.label}" class="font-weight-bolder"></span>
+                <ul class="pl-3 pt-2">
+                    <li>
+                        <span class="font-weight-bolder" th:text="#{book.details.publisher.label} + ': '"></span>
+                        <span th:text="${book.publisher.name}"></span>
+                    </li>
+                    <li>
+                        <span class="font-weight-bolder" th:text="#{book.details.publish-year.label} + ': '"></span>
+                        <span th:text="${book.publishYear}"></span>
+                    </li>
+                    <li>
+                        <span class="font-weight-bolder" th:text="#{book.details.copies-left.label} + ': '"></span>
+                        <span th:text="${book.copies}"></span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="book-detail__buttons">
+                <button class="btn btn-primary mr-3 w-25">Borrow</button>
+                <button class="btn btn-primary">Edit</button>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+</div>
+
+<div th:replace="fragments/general.html :: script-links"></div>
+</body>
+</html>

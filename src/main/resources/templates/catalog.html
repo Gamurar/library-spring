@@ -9,7 +9,6 @@
     <title>Home</title>
 
     <div th:replace="fragments/general.html :: style-links"></div>
-<!--    <link rel="stylesheet" th:href="@{/static/css/main.css}"/>-->
 </head>
 <body>
 
@@ -17,30 +16,24 @@
     <div th:replace="fragments/general.html ::  nav-bar"></div>
     <div class="row justify-content-center mt-5">
         <div class="col-12">
-            <div class="tab-content" id="v-pills-tabContent">
-                <div class="tab-pane fade show active text-center" id="v-pills-home" role="tabpanel"
-                     aria-labelledby="v-pills-home">
 
-                    <div th:replace="fragments/general.html :: site-title"></div>
+            <div th:replace="fragments/general.html :: site-title"></div>
 
-                    <div class="row">
-                        <div th:each="book : ${books}" class="card col-2 m-3 book-card">
-                            <a href="#">
-                                <img th:src="${book.picture}" class="card-img-top" th:alt-title="${book.name}">
-                                <div class="card-body">
-                                    <h5 th:text="${book.name}" class="card-title"></h5>
-                                    <p class="card-text">
+            <div class="row">
+                <div th:each="book : ${books}" class="card col-2 m-3 book-card">
+                    <a th:href="@{detail/book(isbn=${book.isbn})}">
+                        <img th:src="${book.picture}" class="card-img-top" th:alt-title="${book.name}">
+                        <div class="card-body">
+                            <h5 th:text="${book.name}" class="card-title"></h5>
+                            <p class="card-text">
                                         <span th:each="author : ${book.authors}"
                                               th:text="${author.firstName + ' ' + author.lastName + ', '}"></span>
-                                    </p>
-                                </div>
-                            </a>
+                            </p>
                         </div>
-                    </div>
-
-
+                    </a>
                 </div>
             </div>
+
         </div>
     </div>
 </div>
