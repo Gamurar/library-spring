@@ -16,7 +16,7 @@
     <div th:replace="fragments/general.html ::  nav-bar"></div>
     <div class="row justify-content-left mt-5 mx-3">
         <div class="col-4 book-detail__book-cover-img">
-            <img th:src="'/' + ${book.picture}" class="rounded float-left w-100" th:alt-title="${book.name}">
+            <img th:src="#{image.src.content(${book.pictureContent})}" class="rounded float-left w-100" th:alt-title="${book.name}">
         </div>
 
         <div class="col-6 ml-5 mt-3">

@@ -23,7 +23,8 @@ public class DetailController {
     @GetMapping(path = "/book")
     public ModelAndView getBookDetailPage(@RequestParam String isbn) {
         ModelAndView modelAndView = new ModelAndView(VIEW_BOOK_DETAIL);
-        modelAndView.addObject("book", bookService.findByIsbn(isbn));
+        BookForm bookForm = bookService.createBookForm(bookService.findByIsbn(isbn));
+        modelAndView.addObject("book", bookForm);
 
         return modelAndView;
     }

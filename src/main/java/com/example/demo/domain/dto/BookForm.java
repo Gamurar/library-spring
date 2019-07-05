@@ -10,7 +10,7 @@ import java.util.List;
 public class BookForm {
     private String isbn;
     private String name;
-    private String publisher;
+    private PublisherForm publisher;
     private List<AuthorForm> authors = new ArrayList<>(10);
     private String publishYear;
     private Integer copies;

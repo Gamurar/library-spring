@@ -6,6 +6,7 @@ import com.example.demo.domain.dto.BookForm;
 import com.example.demo.domain.Author;
 import com.example.demo.domain.Book;
 import com.example.demo.domain.Publisher;
+import com.example.demo.domain.dto.PublisherForm;
 import com.example.demo.repository.BookRepository;
 import com.example.demo.service.AuthorService;
 import com.example.demo.service.BookService;
@@ -47,7 +48,7 @@ public class BookServiceImpl implements BookService {
     public Book save(BookForm bookForm) {
         log.info("Request to save book with isbn '{}'", bookForm.getIsbn());
         List<Author> authors = createAuthors(bookForm);
-        Publisher publisher = createPublisher(bookForm);
+        Publisher publisher = publisherService.createPublisher(bookForm.getPublisher());
 
         authors = authorService.saveAll(authors);
         publisher = publisherService.save(publisher);
@@ -67,16 +68,17 @@ public class BookServiceImpl implements BookService {
         BookForm bookForm = new BookForm();
         bookForm.setIsbn(book.getIsbn());
         bookForm.setName(book.getName());
-        bookForm.setPublisher(book.getPublisher() != null ? book.getPublisher().getName() : "No publisher");
         bookForm.setPublishYear(book.getPublishYear());
         bookForm.setCopies(book.getCopies());
         bookForm.setPictureName(book.getPicture());
         bookForm.setPictureContent(fileService.convertFileToBase64(book.getPicture()));
 
-
         List<AuthorForm> authorForms = new ArrayList<>();
         book.getAuthors().forEach(author -> authorForms.add(authorService.createAuthorForm(author)));
         bookForm.setAuthors(authorForms);
+
+        PublisherForm publisherForm = publisherService.createPublisherForm(book.getPublisher());
+        bookForm.setPublisher(publisherForm);
 
         return bookForm;
     }
@@ -105,12 +107,5 @@ public class BookServiceImpl implements BookService {
         }
 
         return authors;
-    }
-
-    private Publisher createPublisher(BookForm bookForm) {
-        Publisher publisher = new Publisher();
-        publisher.setName(bookForm.getPublisher());
-
-        return publisher;
     }
 }

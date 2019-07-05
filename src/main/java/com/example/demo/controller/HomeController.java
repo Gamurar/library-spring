@@ -48,21 +48,17 @@ public class HomeController {
     @GetMapping(path = {"/home", "/"})
     public ModelAndView getCatalogPage() {
         ModelAndView modelAndView = new ModelAndView(VIEW_CATALOG);
-        List<Book> books = bookService.findAll();
-        List<BookForm> bookForms = new ArrayList<>();
-        books.forEach(book -> {
-            bookForms.add(bookService.createBookForm(book));
-        });
-
-        System.out.println("picture content: " + bookForms.get(0).getPictureContent());
-
+        List<BookForm> bookForms = createBookForms(bookService.findAll());
         modelAndView.addObject("books", bookForms);
 
         return modelAndView;
     }
 
-
-
+    private List<BookForm> createBookForms(List<Book> books) {
+        List<BookForm> bookForms = new ArrayList<>();
+        books.forEach(book -> bookForms.add(bookService.createBookForm(book)));
+        return bookForms;
+    }
 
 
 }

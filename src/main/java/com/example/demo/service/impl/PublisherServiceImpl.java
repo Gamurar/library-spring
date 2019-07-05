@@ -49,6 +49,17 @@ public class PublisherServiceImpl implements PublisherService {
     }
 
     @Override
+    public Publisher createPublisher(PublisherForm publisherForm) {
+        Publisher publisher = new Publisher();
+        publisher.setName(publisherForm.getName());
+        if (publisherForm.getId() != null) {
+            publisher.setId(publisherForm.getId());
+        }
+
+        return publisher;
+    }
+
+    @Override
     public void deleteById(Long id) {
         repository.deleteById(id);
     }

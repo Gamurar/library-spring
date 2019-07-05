@@ -13,5 +13,7 @@ public interface PublisherService {
 
     PublisherForm createPublisherForm(Publisher publisher);
 
+    Publisher createPublisher(PublisherForm publisherForm);
+
     void deleteById(Long id);
 }
