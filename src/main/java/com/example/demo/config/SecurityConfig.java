@@ -20,12 +20,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private UserDetailsServiceImpl userDetailsService;
 
 
-//    @Override
-//    protected void configure(HttpSecurity http) throws Exception {
-//        http
-//                .authorizeRequests()
-//                .antMatchers("/login", "/logout", "/" ,"/home").permitAll();
-//    }
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http
+                .authorizeRequests()
+                .antMatchers("/login", "/logout", "/" ,"/home").permitAll()
+                .and()
+                .formLogin();
+    }
 
 
     @Override
