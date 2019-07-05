@@ -23,7 +23,7 @@
             <div class="row">
                 <div th:each="book : ${books}" class="card col-2 m-3 book-card">
                     <a th:href="@{detail/book(isbn=${book.isbn})}">
-                        <img th:src="${book.picture}" class="card-img-top" th:alt-title="${book.name}">
+                        <img  class="card-img-top" th:alt-title="${book.name}">
                         <div class="card-body">
                             <h5 th:text="${book.name}" class="card-title"></h5>
                             <p class="card-text catalog__card__authors-list">

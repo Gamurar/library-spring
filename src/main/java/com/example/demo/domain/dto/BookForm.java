@@ -14,5 +14,6 @@ public class BookForm {
     private List<AuthorForm> authors = new ArrayList<>(10);
     private String publishYear;
     private Integer copies;
-    private String picture;
+    private String pictureName;
+    private String pictureContent;
 }

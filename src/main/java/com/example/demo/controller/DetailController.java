@@ -14,7 +14,7 @@ import static com.example.demo.utils.Constants.VIEW_BOOK_DETAIL;
 @RequestMapping("/detail")
 public class DetailController {
 
-    private BookService bookService;
+    private final BookService bookService;
 
     public DetailController(BookService bookService) {
         this.bookService = bookService;

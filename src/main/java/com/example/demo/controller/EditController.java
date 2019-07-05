@@ -23,9 +23,9 @@ import static com.example.demo.utils.Constants.VIEW_EDIT;
 @RequestMapping("/edit")
 public class EditController {
 
-    private BookService bookService;
-    private AuthorService authorService;
-    private PublisherService publisherService;
+    private final BookService bookService;
+    private final AuthorService authorService;
+    private final PublisherService publisherService;
 
     public EditController(BookService bookService,
                           AuthorService authorService,

@@ -9,24 +9,28 @@ import com.example.demo.domain.Publisher;
 import com.example.demo.repository.BookRepository;
 import com.example.demo.service.AuthorService;
 import com.example.demo.service.BookService;
+import com.example.demo.service.FileService;
 import com.example.demo.service.PublisherService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
+import org.apache.commons.io.FileUtils;
 
 @Slf4j
 @Service
 @RequiredArgsConstructor
 public class BookServiceImpl implements BookService {
 
-    private final LibraryProperties properties;
     private final BookRepository repository;
     private final AuthorService authorService;
     private final PublisherService publisherService;
+    private final FileService fileService;
 
     @Override
     public List<Book> findAll() {
@@ -66,6 +70,9 @@ public class BookServiceImpl implements BookService {
         bookForm.setPublisher(book.getPublisher() != null ? book.getPublisher().getName() : "No publisher");
         bookForm.setPublishYear(book.getPublishYear());
         bookForm.setCopies(book.getCopies());
+        bookForm.setPictureName(book.getPicture());
+        bookForm.setPictureContent(fileService.convertFileToBase64(book.getPicture()));
+
 
         List<AuthorForm> authorForms = new ArrayList<>();
         book.getAuthors().forEach(author -> authorForms.add(authorService.createAuthorForm(author)));
@@ -83,7 +90,7 @@ public class BookServiceImpl implements BookService {
         book.setCopies(bookForm.getCopies());
         book.setAuthors(authors);
         book.setPublisher(publisher);
-        book.setPicture(bookForm.getPicture());
+        book.setPicture(bookForm.getPictureName());
 
         return book;
     }

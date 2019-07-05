@@ -1,8 +1,10 @@
 package com.example.demo.controller;
 
+import com.example.demo.config.LibraryProperties;
 import com.example.demo.domain.Book;
 import com.example.demo.domain.dto.BookForm;
 import com.example.demo.service.BookService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.example.demo.utils.Constants.VIEW_CATALOG;
@@ -17,15 +20,10 @@ import static com.example.demo.utils.Constants.VIEW_HOME;
 
 @Controller
 @RequestMapping("/")
+@RequiredArgsConstructor
 public class HomeController {
 
-    private BookService bookService;
-
-
-    @Autowired
-    public HomeController(BookService bookService) {
-        this.bookService = bookService;
-    }
+    private final BookService bookService;
 
 
     @GetMapping(path = "/all-books")
@@ -50,7 +48,15 @@ public class HomeController {
     @GetMapping(path = {"/home", "/"})
     public ModelAndView getCatalogPage() {
         ModelAndView modelAndView = new ModelAndView(VIEW_CATALOG);
-        modelAndView.addObject("books", bookService.findAll());
+        List<Book> books = bookService.findAll();
+        List<BookForm> bookForms = new ArrayList<>();
+        books.forEach(book -> {
+            bookForms.add(bookService.createBookForm(book));
+        });
+
+        System.out.println("picture content: " + bookForms.get(0).getPictureContent());
+
+        modelAndView.addObject("books", bookForms);
 
         return modelAndView;
     }
