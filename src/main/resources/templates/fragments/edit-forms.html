@@ -108,7 +108,7 @@
             <div class="col-md-8 mb-3">
                 <label for="publisher" th:text="#{book.publisher.label}"></label>
                 <input type="text" class="form-control" id="publisher"
-                       th:placeholder="#{add-book.publisher.placeholder}" required="" th:field="${book.publisher}">
+                       th:placeholder="#{add-book.publisher.placeholder}" required="" th:field="${book.publisher.name}">
                 <div class="invalid-feedback">
                     Please enter publisher name.
                 </div>

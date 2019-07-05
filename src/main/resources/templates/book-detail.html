@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -24,7 +25,10 @@
             <h6 class="book-detail__author-list">
                 <span>by </span>
                 <th:block th:each="author, iter : ${book.authors}">
-                    <a th:href="@{/edit/author(id=${author.id})}" th:text="${author.firstName + ' ' + author.lastName}"></a>
+                    <a th:href="@{/edit/author(id=${author.id})}" th:text="${author.firstName + ' ' + author.lastName}"
+                       sec:authorize="hasAnyRole('ROLE_OPERATOR', 'ROLE_ADMIN')"></a>
+                    <span th:href="@{/edit/author(id=${author.id})}" th:text="${author.firstName + ' ' + author.lastName}"
+                          sec:authorize="!hasAnyRole('ROLE_OPERATOR', 'ROLE_ADMIN')"></span>
                     <span th:unless="${iter.last}">, </span>
                 </th:block>
             </h6>
@@ -34,7 +38,10 @@
                 <ul class="pl-3 pt-2">
                     <li>
                         <span class="font-weight-bolder" th:text="#{book.details.publisher.label} + ': '"></span>
-                        <a th:href="@{/edit/publisher(id=${book.publisher.id})}" th:text="${book.publisher.name}"></a>
+                        <a th:href="@{/edit/publisher(id=${book.publisher.id})}" th:text="${book.publisher.name}"
+                           sec:authorize="hasAnyRole('ROLE_OPERATOR', 'ROLE_ADMIN')"></a>
+                        <span th:href="@{/edit/publisher(id=${book.publisher.id})}" th:text="${book.publisher.name}"
+                              sec:authorize="!hasAnyRole('ROLE_OPERATOR', 'ROLE_ADMIN')"></span>
                     </li>
                     <li>
                         <span class="font-weight-bolder" th:text="#{book.details.publish-year.label} + ': '"></span>
@@ -53,7 +60,7 @@
 
             <div class="book-detail__buttons">
                 <button class="btn btn-primary mr-3 w-25">Borrow</button>
-                <a th:href="@{/edit/book(isbn=${book.isbn})}" class="btn btn-primary">Edit</a>
+                <a th:href="@{/edit/book(isbn=${book.isbn})}" class="btn btn-primary" sec:authorize="hasAnyRole('ROLE_OPERATOR', 'ROLE_ADMIN')">Edit</a>
             </div>
         </div>
 

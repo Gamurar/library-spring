@@ -7,6 +7,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
 public class MyUserPrincipal implements UserDetails {
     private User user;
@@ -17,7 +19,11 @@ public class MyUserPrincipal implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.singleton(new SimpleGrantedAuthority("OPERATOR"));
+        Set<SimpleGrantedAuthority> grantedAuthorities = new HashSet<>();
+        user.getAuthorities().forEach(authority ->
+                grantedAuthorities.add(new SimpleGrantedAuthority(authority.getName().name())));
+
+        return grantedAuthorities;
     }
 
     @Override

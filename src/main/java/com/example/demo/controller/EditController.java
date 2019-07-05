@@ -21,6 +21,7 @@ import static com.example.demo.utils.Constants.VIEW_EDIT;
 
 @Controller
 @RequestMapping("/edit")
+@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_OPERATOR')")
 public class EditController {
 
     private final BookService bookService;
