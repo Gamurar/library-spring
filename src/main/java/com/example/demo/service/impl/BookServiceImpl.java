@@ -1,5 +1,6 @@
 package com.example.demo.service.impl;
 
+import com.example.demo.config.LibraryProperties;
 import com.example.demo.domain.dto.AuthorForm;
 import com.example.demo.domain.dto.BookForm;
 import com.example.demo.domain.Author;
@@ -9,33 +10,27 @@ import com.example.demo.repository.BookRepository;
 import com.example.demo.service.AuthorService;
 import com.example.demo.service.BookService;
 import com.example.demo.service.PublisherService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
+@Slf4j
 @Service
+@RequiredArgsConstructor
 public class BookServiceImpl implements BookService {
 
-    private BookRepository repository;
-    private AuthorService authorService;
-    private PublisherService publisherService;
-
-
-    @Autowired
-    public BookServiceImpl(BookRepository repository,
-                           AuthorService authorService,
-                           PublisherService publisherService) {
-        this.repository = repository;
-        this.authorService = authorService;
-        this.publisherService = publisherService;
-    }
+    private final LibraryProperties properties;
+    private final BookRepository repository;
+    private final AuthorService authorService;
+    private final PublisherService publisherService;
 
     @Override
     public List<Book> findAll() {
+        log.info("Request to find all books");
         return repository.findAll();
     }
 
@@ -46,6 +41,7 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public Book save(BookForm bookForm) {
+        log.info("Request to save book with isbn '{}'", bookForm.getIsbn());
         List<Author> authors = createAuthors(bookForm);
         Publisher publisher = createPublisher(bookForm);
 
