@@ -1,18 +1,38 @@
 package com.example.demo;
 
+import com.example.demo.config.LibraryProperties;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.web.servlet.LocaleResolver;
-import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
-import java.util.Locale;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
+@Slf4j
+@RequiredArgsConstructor
 @SpringBootApplication
-public class DemoApplication {
+public class DemoApplication implements CommandLineRunner {
+
+    private final LibraryProperties properties;
 
     public static void main(String[] args) {
         SpringApplication.run(DemoApplication.class, args);
+    }
+
+    @Override
+    public void run(String... args) {
+        Path storagePath = Paths.get(properties.getStoragePath());
+        if (Files.notExists(storagePath)) {
+            log.debug("Create storage path : '{}'", properties.getStoragePath());
+            try {
+                Files.createDirectory(storagePath);
+            } catch (IOException e) {
+                log.error("Create storage path exception message: {}", e.getMessage());
+            }
+        }
     }
 }
