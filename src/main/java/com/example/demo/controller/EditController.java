@@ -15,7 +15,10 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.io.File;
 
 import static com.example.demo.utils.Constants.VIEW_EDIT;
 
@@ -54,9 +57,10 @@ public class EditController {
     @PostMapping(path = "/book")
     public ModelAndView addBook(@ModelAttribute("book") BookForm bookForm,
                                 @RequestParam String action,
+                                @RequestParam(value="book-cover", required=false) MultipartFile bookCover,
                                 BindingResult result) {
         if (action.equals("save")) {
-            bookService.save(bookForm);
+            bookService.save(bookForm, bookCover);
         }
         if (action.equals("delete")) {
             bookService.delete(bookForm);

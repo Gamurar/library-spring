@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
@@ -31,5 +32,19 @@ public class FileServiceImpl implements FileService {
         }
 
         return Base64.getEncoder().encodeToString(fileContent);
+    }
+
+    @Override
+    public void saveFile(MultipartFile file) {
+        try {
+            String filePath = properties.getStoragePath() + "/" + file.getOriginalFilename();
+            File dest = new File(filePath);
+            file.transferTo(dest);
+        } catch (IOException e) {
+            e.printStackTrace();
+            log.error("Can't save multipart file", e);
+        }
+
+        log.info("File " + file.getOriginalFilename() + " saved to local storage");
     }
 }

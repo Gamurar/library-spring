@@ -32,15 +32,7 @@ function appendAuthorField(authorId) {
     $("#edit-book_author_fields").append(authorInput);
 }
 
-// function appendExistedAuthorField(authorId) {
-//     let authorInput = '<div class="row mt-2"> ' +
-//         '<div class="col"> ' +
-//         '<input type="text" class="form-control" name="authors[' + authorId + '].firstName"> ' +
-//         '</div> ' +
-//         '<div class="col"> ' +
-//         '<input type="text" class="form-control"  name="authors[' + authorId + '].lastName"> ' +
-//         '</div> ' +
-//         '</div>';
-//
-//     $("#edit-book_author_fields__old").append(authorInput);
-// }
+function chooseBookCover() {
+    let fileInput = '<input type="file" accept="image/*" hidden="hidden" name="book-cover">';
+    $(fileInput).appendTo('#edit-book__cover-picture').click();
+}

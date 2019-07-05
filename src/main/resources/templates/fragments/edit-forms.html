@@ -11,7 +11,8 @@
 <!-------------------------== Edit author ==-------------------------->
 <div class="row justify-content-md-center" th:fragment="edit-author"
      th:with="isNew=${author.id == -1} ? true : false">
-    <form class="needs-validation col-md-8 col-12 col-lg-12 text-left" novalidate="" action="#" th:action="@{/edit/author}"
+    <form class="needs-validation col-md-8 col-12 col-lg-12 text-left" novalidate="" action="#"
+          th:action="@{/edit/author}"
           method="post">
 
         <div class="row">
@@ -25,11 +26,13 @@
         <div class="form-row mt-3">
             <div class="col">
                 <label for="first-name" th:text="#{author.first-name.label}"></label>
-                <input type="text" class="form-control" th:placeholder="#{add-book.authors.first-name.placeholder}" id="first-name" th:field="${author.firstName}">
+                <input type="text" class="form-control" th:placeholder="#{add-book.authors.first-name.placeholder}"
+                       id="first-name" th:field="${author.firstName}">
             </div>
             <div class="col">
                 <label for="last-name" th:text="#{author.last-name.label}"></label>
-                <input type="text" class="form-control" th:placeholder="#{add-book.authors.last-name.placeholder}" id="last-name" th:field="${author.lastName}">
+                <input type="text" class="form-control" th:placeholder="#{add-book.authors.last-name.placeholder}"
+                       id="last-name" th:field="${author.lastName}">
             </div>
         </div>
 
@@ -43,7 +46,8 @@
 <!-------------------------== Edit publisher ==-------------------------->
 <div class="row justify-content-md-center" th:fragment="edit-publisher"
      th:with="isNew=${publisher.id == -1} ? true : false">
-    <form class="needs-validation col-md-8 col-12 col-lg-12 text-left" novalidate="" action="#" th:action="@{/edit/publisher}"
+    <form class="needs-validation col-md-8 col-12 col-lg-12 text-left" novalidate="" action="#"
+          th:action="@{/edit/publisher}"
           method="post">
 
         <div class="row">
@@ -76,97 +80,110 @@
 <!--TODO: add pictureName field-->
 <div class="row justify-content-md-center" th:fragment="edit-book"
      th:with="isNew=${book.isbn == null} ? true : false">
-    <form class="needs-validation col-md-8 col-12 col-lg-12 text-left" novalidate="" action="#" th:action="@{/edit/book}"
-          method="post">
+
+    <form class="needs-validation col-12 text-left" novalidate="" action="#" th:action="@{/edit/book}"
+          method="post" enctype="multipart/form-data">
 
         <div class="row">
             <h4 class="mb-3 col-11" th:text="${isNew} ? #{add-book.title} : #{edit-book.title}"></h4>
-            <button class="btn btn-danger col-1" th:unless="${isNew}" name="action" value="delete"
+            <button class="btn btn-outline-danger col-1" th:unless="${isNew}" name="action" value="delete"
                     th:text="#{button.delete}"></button>
         </div>
 
-
-        <div class="my-3">
-            <label for="isbn" th:text="#{book.isbn.label}"></label>
-            <div class="input-group">
-                <input name="isbn" type="number" class="form-control" id="isbn"
-                       th:placeholder="#{add-book.isbn.placeholder}" required="" th:field="${book.isbn}">
-                <div class="invalid-feedback" style="width: 100%;">
-                    Your username ISBN of the book.
-                </div>
-            </div>
-        </div>
-        <div class="mb-3">
-            <label for="name" th:text="#{book.book-name.label}"></label>
-            <input type="text" class="form-control" id="name" th:placeholder="#{add-book.book-name.placeholder}"
-                   required="" th:field="${book.name}">
-            <div class="invalid-feedback">
-                Please enter book name.
-            </div>
-        </div>
         <div class="row">
-            <div class="col-md-8 mb-3">
-                <label for="publisher" th:text="#{book.publisher.label}"></label>
-                <input type="text" class="form-control" id="publisher"
-                       th:placeholder="#{add-book.publisher.placeholder}" required="" th:field="${book.publisher.name}">
-                <div class="invalid-feedback">
-                    Please enter publisher name.
-                </div>
-            </div>
-            <div class="col-md-4 mb-3">
-                <label for="publish-year" th:text="#{book.publish-year.label}"></label>
-                <input type="number" class="form-control" id="publish-year"
-                       th:placeholder="#{add-book.publish-year.placeholder}" required=""
-                       th:field="${book.publishYear}">
-                <div class="invalid-feedback">
-                    Please enter publish year.
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-11 mb-3">
-                <label for="edit-book_author_fields" th:text="#{book.authors.label}"></label>
-                <input type="hidden" th:value="${book.authors.size()}" id="amount-of-authors">
-                <div id="edit-book_author_fields">
-                    <div class="row">
-                        <div class="col">
-                            <input type="text" class="form-control"
-                                   th:placeholder="#{add-book.authors.first-name.placeholder}" required=""
-                                   th:field="${book.authors[0].firstName}">
-                            <div class="invalid-feedback">
-                                Please enter authors.
-                            </div>
-                        </div>
-                        <div class="col">
-                            <input type="text" class="form-control"
-                                   th:placeholder="#{add-book.authors.last-name.placeholder}" required=""
-                                   th:field="${book.authors[0].lastName}">
-                            <div class="invalid-feedback">
-                                Please enter authors.
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-1 mt-4">
-                <button type="button" class="btn btn-link" onclick="addAuthorField()">
-                    <i class="fas fa-plus"></i>
+            <div class="col-4 mt-5 text-center" id="edit-book__cover-picture">
+                <img th:src="#{image.src.content(${book.pictureContent})}" class="rounded float-left w-100" th:alt-title="${book.name}">
+                <button type="button" class="btn btn-primary mt-3" onclick="chooseBookCover()">
+                    <span>Upload picture</span>
+                    <i class="fa fa-upload"></i>
                 </button>
             </div>
-        </div>
-        <div class="mb-3">
-            <label for="copies" th:text="#{book.copies.label}"></label>
-            <input type="number" class="form-control" id="copies" th:placeholder="#{add-book.copies.placeholder}"
-                   required="" th:field="${book.copies}">
-            <div class="invalid-feedback">
-                Please enter amount of copies.
+            <div class="col-8">
+                <div class="my-3">
+                    <label for="isbn" th:text="#{book.isbn.label}"></label>
+                    <div class="input-group">
+                        <input name="isbn" type="number" class="form-control" id="isbn"
+                               th:placeholder="#{add-book.isbn.placeholder}" required="" th:field="${book.isbn}">
+                        <div class="invalid-feedback" style="width: 100%;">
+                            Your username ISBN of the book.
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="name" th:text="#{book.book-name.label}"></label>
+                    <input type="text" class="form-control" id="name" th:placeholder="#{add-book.book-name.placeholder}"
+                           required="" th:field="${book.name}">
+                    <div class="invalid-feedback">
+                        Please enter book name.
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8 mb-3">
+                        <label for="publisher" th:text="#{book.publisher.label}"></label>
+                        <input type="text" class="form-control" id="publisher"
+                               th:placeholder="#{add-book.publisher.placeholder}" required=""
+                               th:field="${book.publisher.name}">
+                        <div class="invalid-feedback">
+                            Please enter publisher name.
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="publish-year" th:text="#{book.publish-year.label}"></label>
+                        <input type="number" class="form-control" id="publish-year"
+                               th:placeholder="#{add-book.publish-year.placeholder}" required=""
+                               th:field="${book.publishYear}">
+                        <div class="invalid-feedback">
+                            Please enter publish year.
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-11 mb-3">
+                        <label for="edit-book_author_fields" th:text="#{book.authors.label}"></label>
+                        <input type="hidden" th:value="${book.authors.size()}" id="amount-of-authors">
+                        <div id="edit-book_author_fields">
+                            <div class="row">
+                                <div class="col">
+                                    <input type="text" class="form-control"
+                                           th:placeholder="#{add-book.authors.first-name.placeholder}" required=""
+                                           th:field="${book.authors[0].firstName}">
+                                    <div class="invalid-feedback">
+                                        Please enter authors.
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <input type="text" class="form-control"
+                                           th:placeholder="#{add-book.authors.last-name.placeholder}" required=""
+                                           th:field="${book.authors[0].lastName}">
+                                    <div class="invalid-feedback">
+                                        Please enter authors.
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-1 mt-4">
+                        <button type="button" class="btn btn-link" onclick="addAuthorField()">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="copies" th:text="#{book.copies.label}"></label>
+                    <input type="number" class="form-control" id="copies"
+                           th:placeholder="#{add-book.copies.placeholder}"
+                           required="" th:field="${book.copies}">
+                    <div class="invalid-feedback">
+                        Please enter amount of copies.
+                    </div>
+                </div>
+
+                <button class="btn btn-primary btn-lg btn-block mt-5  col-3" type="submit"
+                        th:text="#{button.save}" name="action"
+                        value="save"></button>
             </div>
         </div>
-
-        <button class="btn btn-primary btn-lg btn-block mt-5  col-2" type="submit"
-                th:text="#{button.save}" name="action"
-                value="save"></button>
     </form>
 </div>
 

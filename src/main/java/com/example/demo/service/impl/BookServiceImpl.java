@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 import org.apache.commons.io.FileUtils;
+import org.springframework.web.multipart.MultipartFile;
 
 @Slf4j
 @Service
@@ -59,6 +60,16 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
+    public Book save(BookForm bookForm, MultipartFile bookCover) {
+        if (bookCover != null) {
+            fileService.saveFile(bookCover);
+            bookForm.setPictureName(bookCover.getOriginalFilename());
+        }
+
+        return save(bookForm);
+    }
+
+    @Override
     public void delete(BookForm bookForm) {
         repository.deleteById(bookForm.getIsbn());
     }
@@ -92,7 +103,9 @@ public class BookServiceImpl implements BookService {
         book.setCopies(bookForm.getCopies());
         book.setAuthors(authors);
         book.setPublisher(publisher);
-        book.setPicture(bookForm.getPictureName());
+        if (bookForm.getPictureName() != null) {
+            book.setPicture(bookForm.getPictureName());
+        }
 
         return book;
     }
