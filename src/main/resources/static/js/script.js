@@ -35,3 +35,16 @@ function appendAuthorField(authorId) {
 function chooseBookCover() {
     $("#edit-book__picture-upload").click();
 }
+
+function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#edit-book_image-cover')
+                .attr('src', e.target.result)
+        };
+
+        reader.readAsDataURL(input.files[0]);
+    }
+}

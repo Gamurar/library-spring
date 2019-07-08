@@ -92,9 +92,9 @@
 
         <div class="row">
             <div class="col-4 mt-5 text-center" id="edit-book__cover-picture">
-                <img th:src="#{image.src.content(${book.pictureContent})}" class="rounded float-left w-100" th:alt-title="${book.name}">
+                <img th:src="#{image.src.content(${book.pictureContent})}" class="rounded float-left w-100" th:alt-title="${book.name}" id="edit-book_image-cover">
                 <input hidden th:field="${book.pictureName}">
-                <input type="file" accept="image/*" hidden="hidden" name="book-cover" value="empty" id="edit-book__picture-upload">
+                <input type="file" accept="image/*" hidden="hidden" name="book-cover" value="empty" id="edit-book__picture-upload" onchange="readURL(this);">
                 <button type="button" class="btn btn-primary mt-3" onclick="chooseBookCover()">
                     <span>Upload picture</span>
                     <i class="fa fa-upload"></i>
