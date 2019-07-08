@@ -1,16 +1,15 @@
 package com.example.demo.controller;
 
-import com.example.demo.domain.Author;
-import com.example.demo.domain.AuthorityType;
-import com.example.demo.domain.Book;
-import com.example.demo.domain.Publisher;
+import com.example.demo.domain.*;
 import com.example.demo.domain.dto.AuthorForm;
 import com.example.demo.domain.dto.BookForm;
+import com.example.demo.domain.dto.ClientForm;
 import com.example.demo.domain.dto.PublisherForm;
 import com.example.demo.service.AuthorService;
 import com.example.demo.service.BookService;
+import com.example.demo.service.ClientService;
 import com.example.demo.service.PublisherService;
-import com.example.demo.utils.Constants;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -25,20 +24,13 @@ import static com.example.demo.utils.Constants.VIEW_EDIT;
 @Controller
 @RequestMapping("/edit")
 @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_OPERATOR')")
+@RequiredArgsConstructor
 public class EditController {
 
     private final BookService bookService;
     private final AuthorService authorService;
     private final PublisherService publisherService;
-
-    public EditController(BookService bookService,
-                          AuthorService authorService,
-                          PublisherService publisherService) {
-        this.bookService = bookService;
-        this.authorService = authorService;
-        this.publisherService = publisherService;
-    }
-
+    private final ClientService clientService;
 
 
     @GetMapping(path = "/book")
@@ -122,6 +114,36 @@ public class EditController {
         }
         if (action.equals("delete")) {
             publisherService.deleteById(publisherForm.getId());
+        }
+
+        return new ModelAndView("redirect:/home");
+    }
+
+    @GetMapping(path = "/client")
+    public ModelAndView getClientEditPage(@RequestParam(value="id", required=false) Long id) {
+        ModelAndView modelAndView = new ModelAndView(VIEW_EDIT);
+        if (id == null) {
+            modelAndView.addObject("client", new ClientForm());
+        } else {
+            Client client = clientService.findById(id);
+            ClientForm clientForm = clientService.createClientForm(client);
+            modelAndView.addObject("client", clientForm);
+        }
+
+        modelAndView.addObject("page", "client");
+
+        return modelAndView;
+    }
+
+    @PostMapping(path = "/client")
+    public ModelAndView editClient(@ModelAttribute("client") ClientForm clientForm,
+                                   @RequestParam String action,
+                                   BindingResult result) {
+        if (action.equals("save")) {
+            clientService.save(clientForm);
+        }
+        if (action.equals("delete")) {
+            clientService.deleteById(clientForm.getId());
         }
 
         return new ModelAndView("redirect:/home");

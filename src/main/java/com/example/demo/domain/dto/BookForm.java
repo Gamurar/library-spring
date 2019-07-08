@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.example.demo.utils.Constants.DEFAULT_PICTURE_CONTENT;
-import static com.example.demo.utils.Constants.DEFAULT_PICTURE_NAME;
 
 @Data
 public class BookForm {

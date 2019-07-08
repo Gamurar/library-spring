@@ -26,6 +26,9 @@
                 <div th:case="'publisher'">
                     <div th:replace="fragments/edit-forms.html :: edit-publisher"></div>
                 </div>
+                <div th:case="'client'">
+                    <div th:replace="fragments/edit-forms.html :: edit-client"></div>
+                </div>
             </th:block>
 
         </div>

@@ -25,12 +25,12 @@
 
         <div class="form-row mt-3">
             <div class="col">
-                <label for="first-name" th:text="#{author.first-name.label}"></label>
+                <label for="first-name" th:text="#{first-name.label}"></label>
                 <input type="text" class="form-control" th:placeholder="#{add-book.authors.first-name.placeholder}"
                        id="first-name" th:field="${author.firstName}">
             </div>
             <div class="col">
-                <label for="last-name" th:text="#{author.last-name.label}"></label>
+                <label for="last-name" th:text="#{last-name.label}"></label>
                 <input type="text" class="form-control" th:placeholder="#{add-book.authors.last-name.placeholder}"
                        id="last-name" th:field="${author.lastName}">
             </div>
@@ -77,7 +77,6 @@
 
 
 <!-------------------------== Edit book ==-------------------------->
-<!--TODO: add pictureName field-->
 <div class="row justify-content-md-center" th:fragment="edit-book"
      th:with="isNew=${book.isbn == null} ? true : false">
 
@@ -92,9 +91,11 @@
 
         <div class="row">
             <div class="col-4 mt-5 text-center" id="edit-book__cover-picture">
-                <img th:src="#{image.src.content(${book.pictureContent})}" class="rounded float-left w-100" th:alt-title="${book.name}" id="edit-book_image-cover">
+                <img th:src="#{image.src.content(${book.pictureContent})}" class="rounded float-left w-100"
+                     th:alt-title="${book.name}" id="edit-book_image-cover">
                 <input hidden th:field="${book.pictureName}">
-                <input type="file" accept="image/*" hidden="hidden" name="book-cover" value="empty" id="edit-book__picture-upload" onchange="readURL(this);">
+                <input type="file" accept="image/*" hidden="hidden" name="book-cover" value="empty"
+                       id="edit-book__picture-upload" onchange="readURL(this);">
                 <button type="button" class="btn btn-primary mt-3" onclick="chooseBookCover()">
                     <span>Upload picture</span>
                     <i class="fa fa-upload"></i>
@@ -186,6 +187,63 @@
                         value="save"></button>
             </div>
         </div>
+    </form>
+</div>
+
+
+<!-------------------------== Edit client ==-------------------------->
+<div class="row justify-content-md-center" th:fragment="edit-client"
+     th:with="isNew=${client.id == -1} ? true : false">
+    <form class="needs-validation col-md-8 col-12 col-lg-12 text-left" novalidate="" action="#"
+          th:action="@{/edit/client}"
+          method="post">
+
+        <div class="row">
+            <h4 class="mb-3 col-11" th:text="${isNew} ? #{add-client.title} : #{edit-client.title}"></h4>
+            <button class="btn btn-danger col-1" th:unless="${isNew}" name="action" value="delete"
+                    th:text="#{button.delete}"></button>
+        </div>
+
+        <input type="hidden" name="id" th:field="${client.id}">
+
+        <div class="form-row my-3">
+            <div class="col">
+                <label for="first-name" th:text="#{first-name.label}"></label>
+                <input type="text" class="form-control" th:placeholder="#{client.first-name.placeholder}"
+                       id="client__first-name" th:field="${client.firstName}">
+            </div>
+            <div class="col">
+                <label for="last-name" th:text="#{last-name.label}"></label>
+                <input type="text" class="form-control" th:placeholder="#{client.last-name.placeholder}"
+                       id="client__last-name" th:field="${client.lastName}">
+            </div>
+        </div>
+
+
+        <div class="mb-3">
+            <label for="publisher" th:text="#{address.label}"></label>
+            <input type="text" class="form-control" id="publisher"
+                   th:placeholder="#{client.address.placeholder}" required=""
+                   th:field="${client.address}">
+            <div class="invalid-feedback">
+                Please enter publisher name.
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="publisher" th:text="#{phone.label}"></label>
+            <input type="text" class="form-control" id="publisher"
+                   th:placeholder="#{client.phone.placeholder}" required=""
+                   th:field="${client.phone}">
+            <div class="invalid-feedback">
+                Please enter publisher name.
+            </div>
+        </div>
+
+
+        <button class="btn btn-primary btn-lg btn-block mt-5 col-2" type="submit"
+                th:text="#{button.save}" name="action"
+                value="save"></button>
     </form>
 </div>
 

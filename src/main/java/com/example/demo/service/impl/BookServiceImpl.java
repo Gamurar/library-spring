@@ -103,16 +103,14 @@ public class BookServiceImpl implements BookService {
         book.setCopies(bookForm.getCopies());
         book.setAuthors(authors);
         book.setPublisher(publisher);
-//        if (bookForm.getPictureName() != null && !bookForm.getPictureName().isEmpty()) {
-            book.setPicture(bookForm.getPictureName());
-//        }
+        book.setPicture(bookForm.getPictureName());
 
         return book;
     }
 
     private List<Author> createAuthors(BookForm bookForm) {
         List<Author> authors = new ArrayList<>();
-        for(AuthorForm authorForm : bookForm.getAuthors()) {
+        for (AuthorForm authorForm : bookForm.getAuthors()) {
             Author author = new Author();
             author.setFirstName(authorForm.getFirstName());
             author.setLastName(authorForm.getLastName());
