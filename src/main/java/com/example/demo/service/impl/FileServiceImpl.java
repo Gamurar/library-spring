@@ -12,6 +12,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Base64;
 
+import static com.example.demo.utils.Constants.DEFAULT_PICTURE_NAME;
+
 @Service
 @Slf4j
 @RequiredArgsConstructor
@@ -21,6 +23,10 @@ public class FileServiceImpl implements FileService {
 
     @Override
     public String convertFileToBase64(String fileName) {
+        if (fileName == null || fileName.isEmpty()) {
+            return getDefaultPictureBase64();
+        }
+
         String filePath = properties.getStoragePath() + "/" + fileName;
 
         byte[] fileContent = new byte[0];
@@ -46,5 +52,10 @@ public class FileServiceImpl implements FileService {
         }
 
         log.info("File " + file.getOriginalFilename() + " saved to local storage");
+    }
+
+    @Override
+    public String getDefaultPictureBase64() {
+        return convertFileToBase64(DEFAULT_PICTURE_NAME);
     }
 }

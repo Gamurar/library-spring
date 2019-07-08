@@ -39,20 +39,18 @@ public class EditController {
         this.publisherService = publisherService;
     }
 
+
+
     @GetMapping(path = "/book")
     public ModelAndView editBook(@RequestParam(value="isbn", required=false) String isbn) {
         ModelAndView modelAndView = new ModelAndView(VIEW_EDIT);
-        if (isbn == null) {
-            modelAndView.addObject("book", new BookForm());
-        } else {
-            Book book = bookService.findByIsbn(isbn);
-            BookForm bookForm = bookService.createBookForm(book);
-            modelAndView.addObject("book", bookForm);
-        }
+        BookForm bookForm = bookService.getBookForm(isbn);
 
+        modelAndView.addObject("book", bookForm);
         modelAndView.addObject("page", "book");
         return modelAndView;
     }
+
 
     @PostMapping(path = "/book")
     public ModelAndView addBook(@ModelAttribute("book") BookForm bookForm,

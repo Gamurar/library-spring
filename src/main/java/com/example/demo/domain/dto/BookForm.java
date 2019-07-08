@@ -1,10 +1,12 @@
 package com.example.demo.domain.dto;
 
-import com.example.demo.domain.Author;
 import lombok.Data;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.example.demo.utils.Constants.DEFAULT_PICTURE_CONTENT;
+import static com.example.demo.utils.Constants.DEFAULT_PICTURE_NAME;
 
 @Data
 public class BookForm {
@@ -13,7 +15,7 @@ public class BookForm {
     private PublisherForm publisher;
     private List<AuthorForm> authors = new ArrayList<>(10);
     private String publishYear;
-    private Integer copies;
+    private Integer copies = 0;
     private String pictureName;
-    private String pictureContent;
+    private String pictureContent = DEFAULT_PICTURE_CONTENT;
 }

@@ -1,11 +1,10 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.config.LibraryProperties;
-import com.example.demo.domain.dto.AuthorForm;
-import com.example.demo.domain.dto.BookForm;
 import com.example.demo.domain.Author;
 import com.example.demo.domain.Book;
 import com.example.demo.domain.Publisher;
+import com.example.demo.domain.dto.AuthorForm;
+import com.example.demo.domain.dto.BookForm;
 import com.example.demo.domain.dto.PublisherForm;
 import com.example.demo.repository.BookRepository;
 import com.example.demo.service.AuthorService;
@@ -15,14 +14,10 @@ import com.example.demo.service.PublisherService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Base64;
-import java.util.List;
-import org.apache.commons.io.FileUtils;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Slf4j
 @Service
@@ -61,7 +56,7 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public Book save(BookForm bookForm, MultipartFile bookCover) {
-        if (bookCover != null) {
+        if (bookCover != null && !bookCover.getOriginalFilename().isEmpty()) {
             fileService.saveFile(bookCover);
             bookForm.setPictureName(bookCover.getOriginalFilename());
         }
@@ -94,6 +89,11 @@ public class BookServiceImpl implements BookService {
         return bookForm;
     }
 
+    @Override
+    public void setDefaultCover(BookForm bookForm) {
+        bookForm.setPictureContent(fileService.getDefaultPictureBase64());
+    }
+
     private Book createBook(BookForm bookForm, List<Author> authors, Publisher publisher) {
 
         Book book = new Book();
@@ -103,9 +103,9 @@ public class BookServiceImpl implements BookService {
         book.setCopies(bookForm.getCopies());
         book.setAuthors(authors);
         book.setPublisher(publisher);
-        if (bookForm.getPictureName() != null) {
+//        if (bookForm.getPictureName() != null && !bookForm.getPictureName().isEmpty()) {
             book.setPicture(bookForm.getPictureName());
-        }
+//        }
 
         return book;
     }
@@ -120,5 +120,20 @@ public class BookServiceImpl implements BookService {
         }
 
         return authors;
+    }
+
+    public BookForm getBookForm(String isbn) {
+        BookForm bookForm;
+        if (isbn == null) {
+            bookForm = new BookForm();
+        } else {
+            Book book = findByIsbn(isbn);
+            bookForm = createBookForm(book);
+        }
+
+        if (bookForm.getPictureContent() == null) {
+            setDefaultCover(bookForm);
+        }
+        return bookForm;
     }
 }

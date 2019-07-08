@@ -19,4 +19,8 @@ public interface BookService {
     void delete(BookForm bookForm);
 
     BookForm createBookForm(Book book);
+
+    void setDefaultCover(BookForm bookForm);
+
+    BookForm getBookForm(String isbn);
 }

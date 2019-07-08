@@ -33,6 +33,5 @@ function appendAuthorField(authorId) {
 }
 
 function chooseBookCover() {
-    let fileInput = '<input type="file" accept="image/*" hidden="hidden" name="book-cover">';
-    $(fileInput).appendTo('#edit-book__cover-picture').click();
+    $("#edit-book__picture-upload").click();
 }

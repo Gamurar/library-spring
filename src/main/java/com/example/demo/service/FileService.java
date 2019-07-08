@@ -7,4 +7,6 @@ public interface FileService {
 
     void saveFile(MultipartFile file);
 
+    String getDefaultPictureBase64();
+
 }
