@@ -10,6 +10,8 @@ import com.example.demo.service.BorrowedBookService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class BorrowedBookServiceImpl implements BorrowedBookService {
@@ -24,18 +26,21 @@ public class BorrowedBookServiceImpl implements BorrowedBookService {
     }
 
     @Override
-    public BorrowedBook createBorrowedBook(String bookIsbn, Long clientId, Integer amount) {
+    public BorrowedBook createBorrowedBook(String bookIsbn, Long clientId) {
         BorrowedBook borrowedBook = new BorrowedBook();
-        borrowedBook.setAmount(amount);
 
         Book book = bookRepository.findByIsbn(bookIsbn);
         Client client = clientRepository.findById(clientId).get();
 
         borrowedBook.setBook(book);
         borrowedBook.setClient(client);
-//        borrowedBook.setBorrowDate(Date);
 
         return borrowedBook;
 
+    }
+
+    @Override
+    public List<BorrowedBook> findAll() {
+        return borrowedBookRepository.findAll();
     }
 }

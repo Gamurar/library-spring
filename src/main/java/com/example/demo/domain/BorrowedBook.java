@@ -1,17 +1,20 @@
 package com.example.demo.domain;
 
 import lombok.Data;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Data
 @Entity
 @Table(name = "borrowed_book")
+@EntityListeners(AuditingEntityListener.class)
 public class BorrowedBook {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
@@ -23,9 +26,8 @@ public class BorrowedBook {
     @JoinColumn(name = "book_isbn")
     private Book book;
 
-    private Integer amount;
-
     @Column(name = "borrow_date")
-    private Date borrowDate;
+    @CreatedDate
+    private LocalDateTime borrowDate;
 
 }
