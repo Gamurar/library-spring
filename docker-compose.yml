@@ -1,0 +1,21 @@
+version: '3'
+services:
+  mysql:
+    image: mysql/mysql-server:5.7
+    restart: always
+    environment:
+      MYSQL_DATABASE: library
+      MYSQL_ROOT_PASSWORD: 123qweASD
+      MYSQL_USER: root
+      MYSQL_PASSWORD: 123qweASD
+    ports:
+      - 3306:3306
+  library-app:
+    image: gamurar/library
+    environment:
+      - SPRING_PROFILES_ACTIVE=mysql
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/test?useSSL=false
+    ports:
+      - 8080:8080
+    depends_on:
+        - mysql

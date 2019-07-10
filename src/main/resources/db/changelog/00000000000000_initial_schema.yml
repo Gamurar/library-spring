@@ -1,8 +1,5 @@
 # Create schema
 databaseChangeLog:
-  - preConditions:
-      - runningAs:
-          username: root
 
   - changeSet:
       id: 1

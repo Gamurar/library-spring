@@ -23,6 +23,8 @@ public class BorrowedBook {
     @JoinColumn(name = "book_isbn")
     private Book book;
 
+    private Integer amount;
+
     @Column(name = "borrow_date")
     private Date borrowDate;
 

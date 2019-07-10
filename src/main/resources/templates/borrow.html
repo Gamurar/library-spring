@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Home</title>
+
+    <div th:replace="fragments/general.html :: style-links"></div>
+</head>
+<body>
+
+<div class="container">
+    <div th:replace="fragments/general.html ::  nav-bar"></div>
+    <div class="row justify-content-left mt-5 mx-3">
+
+        <table class="table table-striped mt-3 text-left" th:unless="${clientList.isEmpty()}">
+            <thead>
+            <tr>
+                <th scope="col" id="book-table_first-col_title"></th>
+                <th scope="col">Name</th>
+                <th scope="col" th:text="#{address.label}">Address</th>
+                <th scope="col" th:text="#{phone.label}">Phone</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="client : ${clientList}">
+                <td scope="row" class="book-table_first-col_first-row">
+                    <a href="#">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                </td>
+                <td th:text="${client.firstName + ' ' + client.lastName}"></td>
+                <td th:text="${client.address}"></td>
+                <td th:text="${client.phone}"></td>
+            </tr>
+            </tbody>
+        </table>
+
+
+    </div>
+</div>
+</div>
+
+<div th:replace="fragments/general.html :: script-links"></div>
+</body>
+</html>

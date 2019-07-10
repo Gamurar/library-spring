@@ -3,6 +3,8 @@ package com.example.demo.service;
 import com.example.demo.domain.Client;
 import com.example.demo.domain.dto.ClientForm;
 
+import java.util.List;
+
 public interface ClientService {
     Client findById(Long id);
 
@@ -11,6 +13,8 @@ public interface ClientService {
     Client save(ClientForm clientForm);
 
     void deleteById(Long id);
+
+    List<Client> findAll();
 
 
 }

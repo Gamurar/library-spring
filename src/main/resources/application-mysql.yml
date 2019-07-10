@@ -3,7 +3,7 @@ spring:
     url: jdbc:mysql://localhost:3306/library?useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC&characterEncoding=UTF-8
     username: root
     password: 123qweASD
-    driver-class-name: com.mysql.jdbc.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
   liquibase:
     change-log: classpath:db/master.xml
     enabled: true
