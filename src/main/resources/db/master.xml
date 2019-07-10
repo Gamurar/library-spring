@@ -6,5 +6,6 @@
 
     <include file="db/changelog/00000000000000_initial_schema.yml" relativeToChangelogFile="false"/>
     <include file="db/changelog/1_create_borrow_book_trigger.yml" relativeToChangelogFile="false"/>
+    <include file="db/changelog/2_create_return_book_trigger.yml" relativeToChangelogFile="false"/>
 
 </databaseChangeLog>

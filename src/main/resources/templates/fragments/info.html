@@ -58,9 +58,7 @@
     <tbody>
     <tr th:each="book : ${borrowedList}">
         <td scope="row" class="book-table_first-col_first-row">
-            <a href="#">
-                <i class="fas fa-edit"></i>
-            </a>
+            <input type="checkbox" class="icheckbox" th:value="${book.id}">
         </td>
         <td th:text="${book.book.name}"></td>
         <td th:text="${book.client.firstName + ' ' + book.client.lastName}"></td>

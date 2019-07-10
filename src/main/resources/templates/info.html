@@ -21,6 +21,9 @@
                     <div th:replace="fragments/info.html :: books-table"></div>
                 </div>
                 <div th:case="'borrowed'">
+                    <form th:action="@{/return-borrowed-books}" method="post">
+                        <button type="submit" class="btn btn-outline-primary float-right mb-3" onclick="deleteBorrowedBooks(this)">Return books</button>
+                    </form>
                     <div th:replace="fragments/info.html :: borrowed-table"></div>
                 </div>
             </th:block>
@@ -30,5 +33,6 @@
 </div>
 
 <div th:replace="fragments/general.html :: script-links"></div>
+<script type="text/javascript" src="/js/borrowed-table.js"></script>
 </body>
 </html>

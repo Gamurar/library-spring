@@ -43,4 +43,11 @@ public class BorrowedBookServiceImpl implements BorrowedBookService {
     public List<BorrowedBook> findAll() {
         return borrowedBookRepository.findAll();
     }
+
+    @Override
+    public void delete(long[] ids) {
+        for (long id : ids) {
+            borrowedBookRepository.deleteById(id);
+        }
+    }
 }

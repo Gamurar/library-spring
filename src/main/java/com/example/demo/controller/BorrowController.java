@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.Arrays;
+
 @Controller
 @RequiredArgsConstructor
 public class BorrowController {
@@ -24,6 +26,22 @@ public class BorrowController {
         BorrowedBook savedBorrowedBook = borrowedBookService.save(borrowedBook);
         ModelAndView modelAndView = new ModelAndView("borrow-result");
         modelAndView.addObject("borrowedBook", savedBorrowedBook);
+
+        return modelAndView;
+    }
+
+    @PostMapping(path = "/return-borrowed-books")
+    public ModelAndView returnBorrowedBooks(@RequestParam String checkedBorrowedBooksId) {
+        ModelAndView modelAndView = new ModelAndView("redirect:/info/borrowed");
+        if(checkedBorrowedBooksId.isEmpty()) {
+            return modelAndView;
+        }
+
+        String[] borrowedBooksId = checkedBorrowedBooksId.split(",");
+        long[] ids = Arrays.stream(borrowedBooksId)
+                .mapToLong(Long::valueOf).toArray();
+
+        borrowedBookService.delete(ids);
 
         return modelAndView;
     }

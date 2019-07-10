@@ -9,13 +9,6 @@ function addAuthorField() {
 }
 
 $( document ).ready(function() {
-    // let amountOfAuthors = $("#amount-of-authors").val();
-    // if (amountOfAuthors > 0) {
-    //     let i;
-    //     for (i = 1; i < amountOfAuthors; i++) {
-    //         appendExistedAuthorField(i);
-    //     }
-    // }
 });
 
 

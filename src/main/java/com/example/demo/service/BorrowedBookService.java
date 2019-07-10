@@ -11,4 +11,6 @@ public interface BorrowedBookService {
     BorrowedBook createBorrowedBook(String bookIsbn, Long clientId);
 
     List<BorrowedBook> findAll();
+
+    void delete(long[] ids);
 }
