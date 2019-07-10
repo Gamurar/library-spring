@@ -92,10 +92,12 @@
 
             <div class="book-detail__buttons">
                 <button type="button" class="btn btn-primary mr-3 w-25" data-toggle="modal"
-                        data-target="#borrow-book-modal">Borrow
+                        data-target="#borrow-book-modal" sec:authorize="hasAnyRole('ROLE_OPERATOR', 'ROLE_ADMIN')"
+                        th:text="#{button.borrow}">
                 </button>
                 <a th:href="@{/edit/book(isbn=${book.isbn})}" class="btn btn-primary"
-                   sec:authorize="hasAnyRole('ROLE_OPERATOR', 'ROLE_ADMIN')">Edit</a>
+                   sec:authorize="hasRole('ROLE_ADMIN')"
+                   th:text="#{button.edit}"></a>
             </div>
         </div>
 

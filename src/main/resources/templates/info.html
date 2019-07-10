@@ -15,9 +15,15 @@
 <div class="container">
     <div th:replace="fragments/general.html ::  nav-bar"></div>
     <div class="row justify-content-left mt-5 mx-3">
-        <div class="alert alert-success" role="alert">
-            <h4 class="alert-heading">Success!</h4>
-            <p th:text="${'The book ' + borrowedBook.book.name + ' has been borrowed by ' + borrowedBook.client.firstName + ' ' + borrowedBook.client.lastName + '.'}"></p>
+        <div class="col-12">
+            <th:block th:switch="${request}">
+                <div th:case="'books'">
+                    <div th:replace="fragments/info.html :: books-table"></div>
+                </div>
+                <div th:case="'borrowed'">
+                    <div th:replace="fragments/info.html :: borrowed-table"></div>
+                </div>
+            </th:block>
         </div>
     </div>
 </div>

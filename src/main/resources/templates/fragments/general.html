@@ -27,14 +27,22 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item dropdown" sec:authorize="hasAnyRole('ROLE_OPERATOR', 'ROLE_ADMIN')">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" th:text="#{nav.add.label}">
+                <a class="nav-link dropdown-toggle" href="#" id="nav-add-item" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" th:text="#{nav.add.label}">
                 </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" th:href="@{/edit/book}" th:text="#{nav.add-book.label}"></a>
-                    <a class="dropdown-item" th:href="@{/edit/author}" th:text="#{nav.add-author.label}"></a>
-                    <a class="dropdown-item" th:href="@{/edit/publisher}" th:text="#{nav.add-publisher.label}"></a>
-                    <div class="dropdown-divider"></div>
+                <div class="dropdown-menu" aria-labelledby="nav-add-item">
+                    <a sec:authorize="hasRole('ROLE_ADMIN')" class="dropdown-item" th:href="@{/edit/book}" th:text="#{nav.add-book.label}"></a>
+                    <a sec:authorize="hasRole('ROLE_ADMIN')" class="dropdown-item" th:href="@{/edit/author}" th:text="#{nav.add-author.label}"></a>
+                    <a sec:authorize="hasRole('ROLE_ADMIN')" class="dropdown-item" th:href="@{/edit/publisher}" th:text="#{nav.add-publisher.label}"></a>
+                    <div sec:authorize="hasRole('ROLE_ADMIN')" class="dropdown-divider"></div>
                     <a class="dropdown-item" th:href="@{/edit/client}" th:text="#{nav.add-client.label}"></a>
+                </div>
+            </li>
+            <li class="nav-item dropdown" sec:authorize="hasAnyRole('ROLE_OPERATOR', 'ROLE_ADMIN')">
+                <a class="nav-link dropdown-toggle" href="#" id="nav-info-item" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" th:text="#{nav.info.label}">
+                </a>
+                <div class="dropdown-menu" aria-labelledby="nav-info-item">
+                    <a sec:authorize="hasAnyRole('ROLE_OPERATOR', 'ROLE_ADMIN')" class="dropdown-item" th:href="@{/info/books}" th:text="#{nav.info.books.label}"></a>
+                    <a sec:authorize="hasAnyRole('ROLE_OPERATOR', 'ROLE_ADMIN')" class="dropdown-item" th:href="@{/info/borrowed}" th:text="#{nav.info.borrowed-books.label}"></a>
                 </div>
             </li>
         </ul>
@@ -59,47 +67,12 @@
     <h1>Library</h1>
 </div>
 
-
-<!-------------------------== Books table ==-------------------------->
-<table class="table table-striped mt-3 text-left" th:unless="${bookList.isEmpty()}" th:fragment="books-table">
-    <thead>
-    <tr>
-        <th scope="col" id="book-table_first-col_title"></th>
-        <th scope="col" th:text="#{book.isbn.label}">ISBN</th>
-        <th scope="col" th:text="#{book.book-name.label}">Name</th>
-        <th scope="col" th:text="#{book.authors.label}">Authors</th>
-        <th scope="col" th:text="#{book.publisher.label}">Publisher</th>
-        <th scope="col" th:text="#{book.publish-year.label}">Publish year</th>
-        <th scope="col" th:text="#{book.copies.label}">Publisher</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="book : ${bookList}">
-        <td scope="row" class="book-table_first-col_first-row">
-            <a th:href="@{/edit(isbn=${book.isbn})}">
-                <i class="fas fa-edit"></i>
-            </a>
-        </td>
-        <td th:text="${book.isbn}"></td>
-        <td th:text="${book.name}"></td>
-        <td>
-                                <span th:each="author : ${book.authors}">
-                                    <span th:text="${author.firstName + ' ' + author.lastName + ','}"></span>
-                                </span>
-
-        </td>
-        <td th:text="${book.publisher?.name}"></td>
-        <td th:text="${book.publishYear}"></td>
-        <td th:text="${book.copies}"></td>
-    </tr>
-    </tbody>
-</table>
-
 <!-------------------------== Script links ==-------------------------->
 <th:block th:fragment="script-links">
     <script type="text/javascript" src="/webjars/jquery/3.0.0/jquery.min.js"></script>
     <script type="text/javascript" src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="/js/script.js" ></script>
 </th:block>
+
 </body>
 </html>
