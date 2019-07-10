@@ -24,7 +24,7 @@
     <tbody>
     <tr th:each="book : ${bookList}">
         <td scope="row" class="book-table_first-col_first-row">
-            <a th:href="@{/edit(isbn=${book.isbn})}">
+            <a th:href="@{/edit/book(isbn=${book.isbn})}">
                 <i class="fas fa-edit"></i>
             </a>
         </td>

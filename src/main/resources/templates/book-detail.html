@@ -90,10 +90,10 @@
                 </ul>
             </div>
 
-            <div class="book-detail__buttons">
-                <button type="button" class="btn btn-primary mr-3 w-25" data-toggle="modal"
+            <div class="book-detail__buttons" th:with="remained = ${book.copies > 0}">
+                <button type="button" class="btn mr-3 w-25" th:classappend="${remained} ? 'btn-primary' : 'btn-outline-primary'" data-toggle="modal"
                         data-target="#borrow-book-modal" sec:authorize="hasAnyRole('ROLE_OPERATOR', 'ROLE_ADMIN')"
-                        th:text="#{button.borrow}">
+                        th:disabled="${!remained}" th:text="${remained} ? #{button.borrow} : #{button.out-of-stock}">
                 </button>
                 <a th:href="@{/edit/book(isbn=${book.isbn})}" class="btn btn-primary"
                    sec:authorize="hasRole('ROLE_ADMIN')"
