@@ -1,0 +1,12 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-borrow-book-trigger
+      author: gamurar
+      changes:
+          - sqlFile:
+              dbms: mysql
+              encoding: utf8
+              endDelimiter: |
+              path: create-borrow-book-trigger.sql
+              relativeToChangelogFile: true
+              splitStatements: false
