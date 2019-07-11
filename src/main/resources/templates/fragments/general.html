@@ -55,8 +55,8 @@
                 <span th:unless="${iter.last}">, </span>
             </th:block>
         </div>
-        <a sec:authorize="isAnonymous()" th:href="@{/login}" class="btn btn-outline-dark">Login</a>
-        <a sec:authorize="isAuthenticated()" th:href="@{/logout}" class="btn btn-outline-dark">Logout</a>
+        <a sec:authorize="isAnonymous()" th:href="@{/login}" class="btn btn-outline-dark" th:text="#{button.login}">Login</a>
+        <a sec:authorize="isAuthenticated()" th:href="@{/logout}" class="btn btn-outline-dark" th:text="#{button.logout}">Logout</a>
     </div>
 </nav>
 
