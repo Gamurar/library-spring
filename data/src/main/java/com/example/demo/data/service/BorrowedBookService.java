@@ -13,5 +13,9 @@ public interface BorrowedBookService {
 
     List<BorrowedBook> findAll();
 
+    BorrowedBook findById(Long id);
+
     void delete(long[] ids);
+
+    void deleteById(Long id);
 }

@@ -3,7 +3,7 @@ package com.example.demo.web.controller;
 
 import com.example.demo.data.service.BorrowedBookService;
 import com.example.demo.data.service.ClientService;
-import com.example.demo.web.service.BookService;
+import com.example.demo.data.service.BookService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

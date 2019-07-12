@@ -1,14 +1,20 @@
 package com.example.demo.data.domain;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Data
 @Entity
-public class Book {
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,
+        property  = "isbn",
+        scope     = String.class)
+public class Book implements Serializable {
 
     @Id
     private String isbn;

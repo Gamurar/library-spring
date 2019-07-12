@@ -6,10 +6,11 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
+import java.io.Serializable;
 
 @Data
 @Entity
-public class Authority {
+public class Authority implements Serializable {
     @Id
     @Enumerated(EnumType.STRING)
     private AuthorityType name;

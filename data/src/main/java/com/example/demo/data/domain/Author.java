@@ -1,10 +1,15 @@
 package com.example.demo.data.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -12,7 +17,7 @@ import java.util.Set;
 @EqualsAndHashCode(exclude="books")
 @ToString(exclude = "books")
 @Entity
-public class Author {
+public class Author implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,6 +35,8 @@ public class Author {
                     CascadeType.MERGE
             },
             mappedBy = "authors")
+
+    @JsonIgnore
     private Set<Book> books = new HashSet<>();
 
 

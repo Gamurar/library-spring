@@ -9,6 +9,7 @@ import com.example.demo.data.repository.ClientRepository;
 import com.example.demo.data.service.BorrowedBookService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -45,9 +46,19 @@ public class BorrowedBookServiceImpl implements BorrowedBookService {
     }
 
     @Override
+    public BorrowedBook findById(Long id) {
+        return borrowedBookRepository.findById(id).get();
+    }
+
+    @Override
     public void delete(long[] ids) {
         for (long id : ids) {
             borrowedBookRepository.deleteById(id);
         }
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        borrowedBookRepository.deleteById(id);
     }
 }

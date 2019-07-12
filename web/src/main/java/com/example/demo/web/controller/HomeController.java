@@ -2,8 +2,9 @@ package com.example.demo.web.controller;
 
 
 import com.example.demo.data.domain.Book;
-import com.example.demo.data.domain.dto.BookForm;
-import com.example.demo.web.service.BookService;
+import com.example.demo.data.domain.dto.BookDTO;
+import com.example.demo.data.service.BookService;
+import com.example.demo.web.service.dto.BookDTOService;
 import com.example.demo.web.utils.Constants;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -22,6 +23,7 @@ import java.util.List;
 public class HomeController {
 
     private final BookService bookService;
+    private final BookDTOService bookDTOService;
 
 
     @GetMapping(path = "/all-books")
@@ -30,15 +32,15 @@ public class HomeController {
 
         if (isbn != null) {
             Book book = bookService.findByIsbn(isbn);
-            BookForm bookForm = bookService.createBookForm(book);
-            model.addObject("book", bookForm);
+            BookDTO bookDTO = bookDTOService.createBookForm(book);
+            model.addObject("book", bookDTO);
 
             return model;
         }
 
         List<Book> bookList = bookService.findAll();
         model.addObject("bookList", bookList);
-        model.addObject("book", new BookForm());
+        model.addObject("book", new BookDTO());
 
         return model;
     }
@@ -46,16 +48,16 @@ public class HomeController {
     @GetMapping(path = {"/home", "/"})
     public ModelAndView getCatalogPage() {
         ModelAndView modelAndView = new ModelAndView(Constants.VIEW_CATALOG);
-        List<BookForm> bookForms = createBookForms(bookService.findAll());
-        modelAndView.addObject("books", bookForms);
+        List<BookDTO> bookDTOS = createBookForms(bookService.findAll());
+        modelAndView.addObject("books", bookDTOS);
 
         return modelAndView;
     }
 
-    private List<BookForm> createBookForms(List<Book> books) {
-        List<BookForm> bookForms = new ArrayList<>();
-        books.forEach(book -> bookForms.add(bookService.createBookForm(book)));
-        return bookForms;
+    private List<BookDTO> createBookForms(List<Book> books) {
+        List<BookDTO> bookDTOS = new ArrayList<>();
+        books.forEach(book -> bookDTOS.add(bookDTOService.createBookForm(book)));
+        return bookDTOS;
     }
 
 
