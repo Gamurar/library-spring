@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: mysql
+    active: h2
   jpa:
     show-sql: true
     hibernate:
@@ -14,10 +14,5 @@ spring:
   mvc:
     servlet:
       load-on-startup: 1
-
-  data:
-    rest:
-      base-path: /api
-
 library:
   storage-path: ${user.home}/library-storage

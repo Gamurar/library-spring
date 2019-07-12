@@ -1,5 +1,6 @@
 package com.example.demo.data.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -22,6 +23,7 @@ public class User implements Serializable {
     private String username;
 
     @NotEmpty
+    @JsonIgnore
     private String password;
 
 
