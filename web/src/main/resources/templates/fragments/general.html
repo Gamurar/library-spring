@@ -44,6 +44,7 @@
                 <div class="dropdown-menu" aria-labelledby="nav-info-item">
                     <a sec:authorize="hasAnyRole('ROLE_OPERATOR', 'ROLE_ADMIN')" class="dropdown-item" th:href="@{/info/books}" th:text="#{nav.info.books.label}"></a>
                     <a sec:authorize="hasAnyRole('ROLE_OPERATOR', 'ROLE_ADMIN')" class="dropdown-item" th:href="@{/info/borrowed}" th:text="#{nav.info.borrowed-books.label}"></a>
+                    <a sec:authorize="hasAnyRole('ROLE_OPERATOR', 'ROLE_ADMIN')" class="dropdown-item" th:href="@{/info/clients}" th:text="#{nav.info.clients.label}"></a>
                 </div>
             </li>
         </ul>

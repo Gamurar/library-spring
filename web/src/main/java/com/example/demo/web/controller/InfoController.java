@@ -2,6 +2,7 @@ package com.example.demo.web.controller;
 
 
 import com.example.demo.data.service.BorrowedBookService;
+import com.example.demo.data.service.ClientService;
 import com.example.demo.web.service.BookService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,7 @@ public class InfoController {
 
     private final BorrowedBookService borrowedBookService;
     private final BookService bookService;
+    private final ClientService clientService;
 
 
     @GetMapping(path = "/borrowed")
@@ -32,6 +34,15 @@ public class InfoController {
         ModelAndView modelAndView = new ModelAndView("info");
         modelAndView.addObject("request", "books");
         modelAndView.addObject("bookList", bookService.findAll());
+
+        return modelAndView;
+    }
+
+    @GetMapping(path = "/clients")
+    public ModelAndView getClientsPage() {
+        ModelAndView modelAndView = new ModelAndView("info");
+        modelAndView.addObject("request", "clients");
+        modelAndView.addObject("clientList", clientService.findAll());
 
         return modelAndView;
     }

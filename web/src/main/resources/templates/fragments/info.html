@@ -67,6 +67,31 @@
     </tbody>
 </table>
 
+<!-------------------------== Clients table ==-------------------------->
+<table class="table table-striped mt-3 text-left" th:unless="${clientList.isEmpty()}"
+       th:fragment="clients-table">
+    <thead>
+    <tr>
+        <th scope="col" id="client-table_first-col_title"></th>
+        <th scope="col" th:text="#{info.client.name.label}"></th>
+        <th scope="col" th:text="#{address.label}"></th>
+        <th scope="col" th:text="#{phone.label}"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="client : ${clientList}">
+        <td scope="row" class="book-table_first-col_first-row">
+            <a th:href="@{/edit/client(id=${client.id})}">
+                <i class="fas fa-edit"></i>
+            </a>
+        </td>
+        <td th:text="${client.firstName + ' ' + client.lastName}"></td>
+        <td th:text="${client.address}"></td>
+        <td th:text="${client.phone}"></td>
+    </tr>
+    </tbody>
+</table>
+
 
 
 

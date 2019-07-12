@@ -26,6 +26,9 @@
                     </form>
                     <div th:replace="fragments/info.html :: borrowed-table"></div>
                 </div>
+                <div th:case="'clients'">
+                    <div th:replace="fragments/info.html :: clients-table"></div>
+                </div>
             </th:block>
         </div>
     </div>
