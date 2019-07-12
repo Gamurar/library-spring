@@ -1,6 +1,6 @@
 package com.example.demo.api.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
@@ -11,46 +11,43 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.AuthenticationEntryPoint;
+import org.springframework.security.web.authentication.www.BasicAuthenticationEntryPoint;
 
 @Configuration
 @EnableWebSecurity
-@Order(1000)
+@Order(1)
+@RequiredArgsConstructor
 public class ApiSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
-    protected void configure(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity
-                .sessionManagement()
-                    .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                    .and()
-                .authorizeRequests()
-                    .antMatchers("/books").permitAll()
-                    .antMatchers("/clients").authenticated()
-                    .and()
+    protected void configure(HttpSecurity http) throws Exception {
+        http.csrf().disable()
+                .antMatcher("/api/**")
                 .httpBasic()
-                    .realmName("Library")
-                    .and()
-                .csrf()
-                    .disable();
-
+                .authenticationEntryPoint(authenticationEntryPoint())
+                .and().authorizeRequests().anyRequest().hasRole("API_CLIENT")
+                .and().sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }
 
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder authentication)
-            throws Exception
-    {
-        authentication.inMemoryAuthentication()
-                .withUser("admin")
-                .password(passwordEncoder().encode("admin"))
-                .authorities("ROLE_ADMIN")
-                .and()
-                .withUser("user")
-                .password(passwordEncoder().encode("user"))
-                .authorities("ROLE_USER");
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        String password = passwordEncoder().encode("123qweASD");
+        auth.inMemoryAuthentication().passwordEncoder(passwordEncoder())
+                .withUser("api-user")
+                .password(password).roles("API_CLIENT");
+    }
+
+    @Bean
+    public AuthenticationEntryPoint authenticationEntryPoint() {
+        BasicAuthenticationEntryPoint entryPoint = new BasicAuthenticationEntryPoint();
+        entryPoint.setRealmName("admin realm");
+        return entryPoint;
     }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
+        return new BCryptPasswordEncoder(11);
     }
 }
