@@ -81,9 +81,9 @@ run as Java Application
 
   - Sign in data
 
-	   ROLE_API_CLIENT
-		username : api-user
-		password : 123qweASD
+	   ROLE_API_CLIENT<br/>
+		username : api-user<br/>
+		password : 123qweASD<br/>
 
 The instructions above will let you run the application with default settings and configurations.
 Please read the instructions on how to connect to MySQL, configure an email server and configure other subsystems
