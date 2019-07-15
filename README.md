@@ -5,6 +5,10 @@ Java open source online library.
 
 <img src="https://raw.githubusercontent.com/Gamurar/docs/master/library-spring/screenshot-home.png"> 
 
+Book details page       				 |  Edit book page
+:---------------------------------------:|:---------------------------------------:|
+<img src="https://raw.githubusercontent.com/Gamurar/docs/master/library-spring/screenshot-book-detail.png"> | <img src="https://raw.githubusercontent.com/Gamurar/docs/master/library-spring/screenshot-edit-book.png">
+
 Used technologies:
 - Spring Boot
 - Spring Data
