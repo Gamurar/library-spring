@@ -11,9 +11,6 @@ import java.util.List;
 
 @Data
 @Entity
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,
-        property  = "isbn",
-        scope     = String.class)
 public class Book implements Serializable {
 
     @Id
@@ -43,4 +40,10 @@ public class Book implements Serializable {
 
     private String picture;
 
+    public static Book fromISBN(String bookISBN) {
+        Book book = new Book();
+        book.setIsbn(bookISBN);
+
+        return book;
+    }
 }

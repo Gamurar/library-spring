@@ -1,5 +1,7 @@
 package com.example.demo.data.domain;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -27,4 +29,11 @@ public class Client implements Serializable {
     private String address;
 
     private String phone;
+
+
+    public static Client fromId(Long clientId) {
+        Client client = new Client();
+        client.id = clientId;
+        return client;
+    }
 }

@@ -1,7 +1,9 @@
 package com.example.demo.data.domain;
 
 import com.fasterxml.jackson.annotation.*;
+import lombok.AccessLevel;
 import lombok.Data;
+import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -24,16 +26,40 @@ public class BorrowedBook implements Serializable {
     @JoinColumn(name = "client_id")
     @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
     @JsonIdentityReference(alwaysAsId = true)
+    @JsonProperty("clientId")
     private Client client;
 
     @ManyToOne
     @JoinColumn(name = "book_isbn")
-    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "isbn")
+    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property  = "isbn")
     @JsonIdentityReference(alwaysAsId = true)
+    @JsonProperty("bookISBN")
     private Book book;
 
     @Column(name = "borrow_date")
     @CreatedDate
     private LocalDateTime borrowDate;
+
+
+    @JsonProperty("clientId")
+    public void setClientById(Long clientId) {
+        client = Client.fromId(clientId);
+    }
+
+    @JsonIgnore
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
+    @JsonProperty("bookISBN")
+    public void setBookByISBN(String bookISBN) {
+        book = Book.fromISBN(bookISBN);
+    }
+
+    @JsonIgnore
+    public void setBook(Book book) {
+        this.book = book;
+    }
+
 
 }

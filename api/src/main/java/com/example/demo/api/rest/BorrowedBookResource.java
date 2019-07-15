@@ -20,7 +20,6 @@ public class BorrowedBookResource {
     private final BorrowedBookService borrowedBookService;
 
 
-//    TODO: This shit doesn't work! Fix it!
     @PostMapping(value = "/borrowedBooks")
     public BorrowedBook borrowBook(@Valid @RequestBody BorrowedBook borrowedBook) {
         log.debug("REST request to save borrowed book : {}", borrowedBook);
