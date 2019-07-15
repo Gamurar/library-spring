@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class PublisherServiceImpl implements PublisherService {
@@ -17,6 +19,11 @@ public class PublisherServiceImpl implements PublisherService {
     @Override
     public Publisher findById(Long id) {
         return repository.findById(id).get();
+    }
+
+    @Override
+    public List<Publisher> findAll() {
+        return repository.findAll();
     }
 
     @Override
