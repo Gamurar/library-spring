@@ -61,17 +61,17 @@ run as Java Application
 
   - Sign in data
 
-	   ROLE_ADMIN
-		username : admin
-		password : admin
+	   ROLE_ADMIN<br/>
+		username : admin<br/>
+		password : admin<br/>
 
-	   ROLE_USER
-		username : user
-		password : user
+	   ROLE_USER<br/>
+		username : user<br/>
+		password : user<br/>
 
-	   ROLE_USER, ROLE_OPERATOR, ROLE_ADMIN
-		username : cat
-		password : meow
+	   ROLE_USER, ROLE_OPERATOR, ROLE_ADMIN<br/>
+		username : cat<br/>
+		password : meow<br/>
 
 - Access the api section at: http://localhost:8080/api/books
 
