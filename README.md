@@ -1,15 +1,18 @@
 Library online (for java 11.0.3 +)
 -------------------
-[![Docker Pulls](https://img.shields.io/docker/pulls/gamurar/library.svg)
+![Docker Pulls](https://img.shields.io/docker/pulls/gamurar/library.svg)
 -------------------
 
-Java open source e-commerce software
+Java open source online library.
 
-- Shopping cart
-- Catalogue
-- Search
-- Checkout
-- Administration
+Used technologies:
+- Spring Boot
+- Spring Data
+- Role Based Spring Security
+- Spring MVC
+- JPA
+- Thymeleaf
+- MySQL
 - REST API
 
 
@@ -34,27 +37,11 @@ if Maven is not installed, use maven wrapper
 	$ mvmw clean install
 	
 
-Run the application from Tomcat 
--------------------
-copy sm-shop/target/ROOT.war to tomcat or any other application server deployment dir
-
-Increase heap space to 1024 m
-
-### Heap space configuration in Tomcat:
-
-
-If you are using Tomcat, edit catalina.bat for windows users or catalina.sh for linux / Mac users
-
-	in Windows
-	set JAVA_OPTS="-Xms1024m -Xmx1024m -XX:MaxPermSize=256m" 
-	
-	in Linux / Mac
-	export JAVA_OPTS="-Xms1024m -Xmx1024m -XX:MaxPermSize=256m" 
 
 Run the application from Spring boot 
 -------------------
 
-       $ cd sm-shop
+       $ cd web
        $ mvn spring-boot:run
 if Maven is not installed, use maven wrapper
        
@@ -63,7 +50,7 @@ if Maven is not installed, use maven wrapper
 Run the application from Spring boot in eclipse
 -------------------
 
-Right click on com.salesmanager.shop.application.ShopApplication
+Right click on com.example.demo.web.Launcher
 
 run as Java Application
 
@@ -72,30 +59,19 @@ run as Java Application
 
 Access the deployed web application at: http://localhost:8080/
 
-Acces the admin section at: http://localhost:8080/admin
+Access the api section at: http://localhost:8080/api/books
 
-username : admin
+username : api-user
 
-password : password
+password : 123qweASD
 
 The instructions above will let you run the application with default settings and configurations.
 Please read the instructions on how to connect to MySQL, configure an email server and configure other subsystems
 
 
-### Documentation:
+### Api Documentation:
 -------------------
 
-Documentation available from the wiki <http://shopizer-ecommerce.github.io/shopizer/#>
-
-ChatOps <https://shopizer.slack.com>  - Join our Slack channel https://shopizer-slackin.herokuapp.com/
-
-More information is available on shopizer web site here <http://www.shopizer.com>
-
-### Participation:
--------------------
-
-If you have interest in giving feedback or for participating to Shopizer project in any way
-Feel to use the contact form <http://www.shopizer.com/contact.html> and share your email address
-so we can send an invite to our Slack channel
+Documentation available from the swagger ui <http://localhost:8080/swagger-ui.html>
 
 
