@@ -1,7 +1,5 @@
 Library online (for java 11.0.3 +)
 -------------------
-![Docker Pulls](https://img.shields.io/docker/pulls/gamurar/library.svg)
--------------------
 
 Java open source online library.
 
@@ -59,13 +57,29 @@ run as Java Application
 ### Access the application:
 -------------------
 
-Access the deployed web application at: http://localhost:8080/
+- Access the deployed web application at: http://localhost:8080/
 
-Access the api section at: http://localhost:8080/api/books
+ - Sign in data -
 
-username : api-user
+   ROLE_ADMIN
+	username : admin
+	password : admin
 
-password : 123qweASD
+   ROLE_USER
+	username : user
+	password : user
+
+   ROLE_USER, ROLE_OPERATOR, ROLE_ADMIN
+	username : cat
+	password : meow
+
+- Access the api section at: http://localhost:8080/api/books
+
+ - Sign in data -
+
+   ROLE_API_CLIENT
+	username : api-user
+	password : 123qweASD
 
 The instructions above will let you run the application with default settings and configurations.
 Please read the instructions on how to connect to MySQL, configure an email server and configure other subsystems
