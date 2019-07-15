@@ -17,6 +17,7 @@ Used technologies:
 - JPA
 - Thymeleaf
 - MySQL
+- Liquibase
 - REST API
 
 
