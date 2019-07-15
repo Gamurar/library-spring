@@ -1,9 +1,6 @@
-Library (for java 1.8 +)
+Library online (for java 11.0.3 +)
 -------------------
-[![last_version](https://img.shields.io/badge/last_version-v2..6.0-blue.svg?style=flat)](https://github.com/shopizer-ecommerce/shopizer/tree/2..6.0)
-[![Official site](https://img.shields.io/website-up-down-green-red/https/shields.io.svg?label=official%20site)](http://www.shopizer.com/)
-[![Docker Pulls](https://img.shields.io/docker/pulls/shopizerecomm/shopizer.svg)](https://hub.docker.com/r/shopizerecomm/shopizer)
-[![stackoverflow](https://img.shields.io/badge/shopizer-stackoverflow-orange.svg?style=flat)](http://stackoverflow.com/questions/tagged/shopizer)
+[![Docker Pulls](https://img.shields.io/docker/pulls/gamurar/library.svg)
 -------------------
 
 Java open source e-commerce software
@@ -24,13 +21,13 @@ Clone the repository:
 
 If this is your first time using Github, review http://help.github.com to learn the basics.
 
-You can also download the zip file containing the code from https://github.com/shopizer-ecommerce/shopizer 
+You can also download the zip file containing the code from https://github.com/Gamurar/library-spring/archive/master.zip
 
 To build the application:
 -------------------	
 From the command line with Maven installed:
 
-	$ cd shopizer
+	$ cd library-spring
 	$ mvn clean install
 if Maven is not installed, use maven wrapper
        

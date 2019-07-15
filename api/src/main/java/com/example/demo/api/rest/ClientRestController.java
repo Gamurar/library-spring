@@ -3,7 +3,6 @@ package com.example.demo.api.rest;
 
 import com.example.demo.data.domain.Client;
 import com.example.demo.data.service.ClientService;
-import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
