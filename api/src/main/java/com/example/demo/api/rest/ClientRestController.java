@@ -1,10 +1,9 @@
 package com.example.demo.api.rest;
 
 
-import com.example.demo.data.domain.Author;
 import com.example.demo.data.domain.Client;
-import com.example.demo.data.service.AuthorService;
 import com.example.demo.data.service.ClientService;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +15,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api")
-public class ClientResource {
+public class ClientRestController {
 
     private final ClientService clientService;
 

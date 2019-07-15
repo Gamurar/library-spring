@@ -15,7 +15,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api")
-public class BorrowedBookResource {
+public class BorrowedBookRestController {
 
     private final BorrowedBookService borrowedBookService;
 

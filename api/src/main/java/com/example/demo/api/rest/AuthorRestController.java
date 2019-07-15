@@ -18,7 +18,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api")
-public class AuthorResource {
+public class AuthorRestController {
 
     private final AuthorService authorService;
 
