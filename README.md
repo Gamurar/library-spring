@@ -59,27 +59,27 @@ run as Java Application
 
 - Access the deployed web application at: http://localhost:8080/
 
- - Sign in data -
+  - Sign in data
 
-   ROLE_ADMIN
-	username : admin
-	password : admin
+	   ROLE_ADMIN
+		username : admin
+		password : admin
 
-   ROLE_USER
-	username : user
-	password : user
+	   ROLE_USER
+		username : user
+		password : user
 
-   ROLE_USER, ROLE_OPERATOR, ROLE_ADMIN
-	username : cat
-	password : meow
+	   ROLE_USER, ROLE_OPERATOR, ROLE_ADMIN
+		username : cat
+		password : meow
 
 - Access the api section at: http://localhost:8080/api/books
 
- - Sign in data -
+  - Sign in data
 
-   ROLE_API_CLIENT
-	username : api-user
-	password : 123qweASD
+	   ROLE_API_CLIENT
+		username : api-user
+		password : 123qweASD
 
 The instructions above will let you run the application with default settings and configurations.
 Please read the instructions on how to connect to MySQL, configure an email server and configure other subsystems
