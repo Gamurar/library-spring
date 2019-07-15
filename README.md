@@ -5,6 +5,8 @@ Library online (for java 11.0.3 +)
 
 Java open source online library.
 
+<img src="https://raw.githubusercontent.com/Gamurar/docs/master/library-spring/screenshot-home.png"> 
+
 Used technologies:
 - Spring Boot
 - Spring Data
