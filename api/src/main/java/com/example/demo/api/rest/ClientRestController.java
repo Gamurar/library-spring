@@ -27,11 +27,7 @@ public class ClientRestController {
     @ApiOperation(value = "Add a client")
     public Client createClient(@Valid @RequestBody Client client) {
         log.debug("REST request to save Client : {}", client);
-        if (client.getId() != null) {
-            log.error("A new client cannot already have an ID");
-            return null;
-        }
-
+        client.setId(null);
         return clientService.save(client);
     }
 

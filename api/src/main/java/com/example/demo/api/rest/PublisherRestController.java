@@ -28,11 +28,7 @@ public class PublisherRestController {
     @ApiOperation(value = "Create new publisher")
     public Publisher createPublisher(@Valid @RequestBody Publisher publisher) {
         log.debug("REST request to save Publisher : {}", publisher);
-        if (publisher.getId() != null) {
-            log.error("A new publisher cannot already have an ID");
-            return null;
-        }
-
+        publisher.setId(null);
         return publisherService.save(publisher);
     }
 

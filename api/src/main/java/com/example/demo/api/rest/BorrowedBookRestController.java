@@ -28,11 +28,7 @@ public class BorrowedBookRestController {
     @ApiOperation(value = "Borrow a book")
     public BorrowedBook borrowBook(@Valid @RequestBody BorrowedBook borrowedBook) {
         log.debug("REST request to save borrowed book : {}", borrowedBook);
-        if (borrowedBook.getId() != null) {
-            log.error("A new borrowed book cannot already have an ID");
-            return null;
-        }
-
+        borrowedBook.setId(null);
         return borrowedBookService.save(borrowedBook);
     }
 

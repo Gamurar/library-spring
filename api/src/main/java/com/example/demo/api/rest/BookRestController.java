@@ -27,11 +27,7 @@ public class BookRestController {
     @ApiOperation(value = "Create a new book")
     public Book createBook(@Valid @RequestBody Book book) {
         log.debug("REST request to save Book : {}", book);
-        if (book.getIsbn() != null) {
-            log.error("A new book cannot already have an ISBN");
-            return null;
-        }
-
+        book.setIsbn(null);
         return bookService.save(book);
     }
 
